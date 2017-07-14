@@ -1,0 +1,102 @@
+.settings {
+	padding: 25px;
+	background-color: #343436;
+}
+
+.box-tab {
+	.tab-content {
+		display: none;
+		margin: 0 -25px;
+		padding: 0 25px;
+		background-color: #1A1C1D;
+	}
+}
+
+.tab-lable {
+	position: absolute;
+	left: -9999px;
+	+ label {
+		display: inline-block;
+		min-width: 100px;
+		padding: 0 10px;
+		margin: 0 2px;
+		border-radius: 8px 8px 0px 0px;
+		background-color: #272829;
+		border-bottom: none;
+		position: relative;
+		z-index: 5;
+		&:before, &:after {
+			content: '';
+			display: inline-block;
+			width: 0; height: 0; 
+			border-bottom: 34px solid #272829;
+			border-left: 15px solid transparent;
+			position: absolute;
+			left: -13px;
+			top: 2px;
+		}
+		&:after {
+			border-left: none;
+			border-right: 10px solid transparent;
+			left: auto;
+			right: -8px;
+		}
+	}
+	&:checked {
+		+ label {
+			background-color: #1A1C1D;
+			z-index: 10;
+			&:before, &:after {
+				border-bottom: 37px solid #1A1C1D;
+			}
+		}
+	}
+	&#tab01:checked ~ .box-tab #tab-cont01, 
+	&#tab02:checked ~ .box-tab #tab-cont02,
+	&#tab03:checked ~ .box-tab #tab-cont03 {
+		display: block;
+	}
+}
+
+.result {
+	display: flex;
+	> div {
+		width: 33.333%;
+		border: 5px solid #343436;
+		.heading {
+			padding: 5px 25px;
+			background-color: #1A1C1D;
+			border-bottom: 1px solid rgba(255,255,255,0.05);
+		}
+		h2 {
+			color: #ccc;
+			font-size: 1.3rem;
+			margin: 0;
+		}
+	}
+	.code {
+		padding: 10px 20px;
+		height: calc(100% - 45px);
+		background-color: #1D1F20;
+		line-height: 1.2;
+		font-size: 1.1rem;
+		display: inline-block;
+
+	}
+	.tag {
+		color: #F92672;
+	}
+	.atr {
+		color: #A6E22E;
+	}
+	.value {
+		color: #E6DB74;
+	}
+	.rule {
+		color: #66D9EF;
+		font-style: italic;
+	}
+	.numer {
+		color: #AE81FF;
+	}
+}
