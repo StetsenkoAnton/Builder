@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BUILD</title>
+	<link media="all" rel="stylesheet" href="scss/style.css">
+	
+</head>
+<body>
+	<div id="app" v-bind:class="styleSelect">
+	<!-- <div>
+		<button class="btn" type="button" v-on:click="loadBase()">+</button>
+	</div> -->
+		<!-- <pre>{{ menu[0] }}</pre> -->
+		<main class="app_main">
+			<section class="app_settings">
+				<ul class="app_tab-list">
+					<li class="app_tab" 
+						v-for="(tab, index) in menu"
+						v-bind:class="{active: tabSelect == 'tab'+index}">
+						<button class="btn-tab" type="button" 
+								v-on:click="tabSelect = 'tab'+index"
+								v-bind:contenteditable="editMode">
+							<span>{{ tab.tabName }}</span>
+						</button>
+						<button class="edit-tab" type="button"
+								v-if="editMode"	
+								>Edit</button>
+					</li>
+					<li class="app_tab">
+						<button class="btn-tab" type="button" v-on:click="addTab">
+							<span>+</span>
+						</button>
+					</li>
+				</ul>
+				<div class="app_component-box">
+					<ul class="app_tab-content" 
+						v-for="(tab, index) in menu" 
+						v-if="tabSelect == 'tab'+index">
+						<li class="app_component" v-for="box in tab.tabBox">
+							<label>
+								<input type="checkbox" class="checkbox" v-model="box.boxShow">
+								{{ box.boxName }}
+							</label>
+						</li>
+						<li>
+							<button type="button" class="btn btn-white" v-on:click="openPopup(tab.tabBox)" >+</button>
+						</li>
+					</ul>
+				</div>
+			</section>
+		
+			<section class="app_result">
+				<div class="result-item html-result">
+				 	<div class="heading">
+						<h4>HTML</h4> 
+					</div>
+					<div class="result-box hljs">
+						<div v-for="tab in menu">
+							<pre 
+								v-highlightjs="box.boxHtml" 
+								v-for="box in tab.tabBox" 
+								v-if="box.boxShow" 
+								contenteditable 
+								spellcheck="false">&lt;!-- {{box.boxName}} --&gt;
+								<code></code>
+							</pre>
+						</div>
+					</div>
+				</div>
+				<div class="result-item css-result">
+					<div class="heading">
+						<h4>CSS</h4>
+					</div>
+					<div class="result-box hljs">
+						<div v-for="tab in menu">
+							<pre 
+								v-highlightjs="box.boxCss" 
+								v-for="box in tab.tabBox" 
+								v-if="box.boxShow" 
+								contenteditable 
+								spellcheck="false">/*-- {{box.boxName}} --*/
+								<code></code>
+							</pre>
+						</div>
+					</div>
+				</div>
+				<div class="result-item js-result">
+					<div class="heading">
+						<h4>JS</h4>
+					</div>
+					<div class="result-box hljs">
+						<div v-for="tab in menu">
+							<pre 
+								v-highlightjs="box.boxJs" 
+								v-for="box in tab.tabBox" 
+								v-if="box.boxShow" 
+								contenteditable 
+								spellcheck="false">//-- {{box.boxName}} --
+								<code></code>
+							</pre>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="app_footer">
+			<span class="copyright"><a href="https://github.com/StetsenkoAnton/Builder/issues">Add issue</a></span>
+			<div>
+				<label>
+					<span>Edit mode</span>
+					<input type="checkbox" v-model="editMode">
+				</label>
+				
+				<span>Change style code</span>
+				<select name="" id="" v-model="styleSelect">
+					<option value="agate">agate</option>
+					<option value="androidstudio">androidstudio</option>
+					<option value="atelier-savanna-dark">atelier-savanna-dark</option>
+					<option value="atelier-savanna-light">atelier-savanna-light</option>
+					<option value="atom-one-dark">atom-one-dark</option>
+					<option value="atom-one-light">atom-one-light</option>
+					<option value="codepen-embed">codepen-embed</option>
+					<option value="color-brewer">color-brewer</option>
+					<option value="darcula">darcula</option>
+					<option value="darkula">darkula</option>
+					<option value="foundation">foundation</option>
+					<option value="github">github</option>
+					<option value="github-gist">github-gist</option>
+					<option value="googlecode">googlecode</option>
+					<option value="monokai-sublime">monokai-sublime</option>
+				</select>
+			</div>
+		</footer>
+		<section class="popup popup_new-template" 
+				v-if="popupShow" 
+				v-show="popupShow">
+			<div class="popup_box">
+				<header class="popup_head">
+					<h1>Create new template</h1>
+					<label>
+						<input type="text" placeholder="Template name" v-model="popupModel.boxName">
+					</label>
+				</header>
+				<div class="app_result">
+				  <div class="result-item html-result">
+					<div class="heading">
+					  <h4>HTML</h4> 
+					</div>
+					<textarea placeholder="HTML" v-model="popupModel.boxHtml"></textarea>
+				  </div>
+				  <div class="result-item css-result">
+					<div class="heading">
+					  <h4>SCSS</h4>
+					</div>
+					<textarea placeholder="CSS" v-model="popupModel.boxCss" emmet-syntax-css></textarea>
+				  </div>
+				  <div class="result-item js-result">
+					<div class="heading">
+					  <h4>JS</h4>
+					</div>
+					<textarea placeholder="JS" v-model="popupModel.boxJs"></textarea>
+				  </div>
+				</div>
+				<footer class="popup_foot">
+					<button class="btn btn--alert" title="delete new template" v-on:click="cancelPopup">Cancel</button>
+					<button class="btn" v-on:click="saveBox">Save</button>
+				</footer>
+			</div>
+		</section>
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/vuefirebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+	<script src="js/highlight.pack.js"></script> 
+	<script>
+    // Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyC-di1Xzu86XyDIAuzCanfOk2j6n4bCd_Q",
+		authDomain: "fitter-template.firebaseapp.com",
+		databaseURL: "https://fitter-template.firebaseio.com",
+		projectId: "fitter-template",
+		storageBucket: "fitter-template.appspot.com",
+		messagingSenderId: "626900079578"
+	};
+  	firebase.initializeApp(config);
+
+	var dataRef = firebase.database().ref('templates');
+
+	 // Initialize Highlight
+	Vue.directive('highlightjs', {
+	  deep: true,
+	  bind: function(el, binding) {
+		// on first bind, highlight all targets
+		let targets = el.querySelectorAll('code')
+		targets.forEach((target) => {
+		  // if a value is directly assigned to the directive, use this
+		  // instead of the element content.
+		  if (binding.value) {
+			target.textContent = binding.value
+		  }
+		  hljs.highlightBlock(target)
+		})
+	  },
+	  componentUpdated: function(el, binding) {
+		// after an update, re-fill the content and then highlight
+		let targets = el.querySelectorAll('code')
+		targets.forEach((target) => {
+		  if (binding.value) {
+			target.textContent = binding.value
+			hljs.highlightBlock(target)
+		  }
+		})
+	  }
+	});
+
+	var app = new Vue({
+	  el: '#app',
+	  data: {
+		tabSelect: 'tab0',
+		popupShow: false,
+		styleSelect: 'atom-one-dark',
+		editMode: false,
+		menu: []
+	  },
+	  methods: {
+		addTab: function (){
+			var tab = {
+				tabName:'New tab',
+				tabBox: []
+			}
+			this.menu.push(tab)
+		},
+		cancelPopup: function (){
+			this.popupShow = false;
+		},
+		openPopup: function (tab){
+			this.popupShow = true;
+			this.tabInEdit = tab;
+			this.popupModel = {
+				boxName: '',
+				boxShow: false,
+				boxHtml: '',
+				boxCss: '',
+				boxJs: ''
+			}
+		},
+		saveBox: function() {
+			this.tabInEdit.push(this.popupModel);
+			//dataRef.push(self.menu);
+			this.writeBase();
+			this.cancelPopup();
+		},
+		loadBase: function() {
+			var self = this;
+			dataRef.once('value').then(function(s){
+				self.menu = s.val();
+			})
+		},
+		writeBase: function() {
+			var self = this;
+			dataRef.set(self.menu);
+		}
+	  }
+	});
+	app.loadBase();
+
+	
+
+	</script>
+	
+</body>
+</html>

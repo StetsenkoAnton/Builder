@@ -1,0 +1,1723 @@
+@charset "UTF-8";
+/*
+Theme Name: 2D3D
+Author: Anonymous
+Author URI:
+Version: 1
+Description: Base theme for Wordpress
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: base
+Tags: one-column, two-columns
+Theme URI:
+*/
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%
+  /* 2 */ }
+
+/**
+ * Remove default margin.
+ */
+body {
+  margin: 0; }
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block; }
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline
+  /* 2 */ }
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ */
+[hidden],
+template {
+  display: none; }
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+a {
+  background-color: transparent; }
+
+/**
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
+ */
+a:active,
+a:hover {
+  outline: 0; }
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+abbr[title] {
+  border-bottom: 1px dotted; }
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+b,
+strong {
+  font-weight: bold; }
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+dfn {
+  font-style: italic; }
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+small {
+  font-size: 80%; }
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+img {
+  border: 0; }
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+figure {
+  margin: 1em 40px; }
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+hr {
+  box-sizing: content-box;
+  height: 0; }
+
+/**
+ * Contain overflow in all browsers.
+ */
+pre {
+  overflow: auto;
+  margin: 0; }
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0
+  /* 3 */ }
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+button {
+  overflow: visible; }
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+button,
+select {
+  text-transform: none; }
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer
+  /* 3 */ }
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+button[disabled],
+html input[disabled] {
+  cursor: default; }
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0; }
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+input {
+  line-height: normal; }
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0
+  /* 2 */ }
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  box-sizing: content-box
+  /* 2 */ }
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0
+  /* 2 */ }
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+textarea {
+  overflow: auto; }
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+optgroup {
+  font-weight: bold; }
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+td,
+th {
+  padding: 0; }
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both; }
+
+.ellipsis {
+  white-space: nowrap;
+  /* 1 */
+  text-overflow: ellipsis;
+  /* 2 */
+  overflow: hidden; }
+
+html {
+  font-size: 12px;
+  line-height: 1.25;
+  box-sizing: border-box; }
+  @media (min-width: 768px) {
+    html {
+      font-size: 15.996px; } }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+* {
+  max-height: 1000000px; }
+
+body {
+  color: #fff;
+  background: #111;
+  font-family: "Arial", sans-serif;
+  min-width: 320px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle; }
+
+.gm-style img {
+  max-width: none; }
+
+form,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border-style: none; }
+
+input[type='text'],
+input[type='tel'],
+input[type='email'],
+input[type='search'],
+input[type='password'],
+textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #444;
+  outline: none;
+  display: inline-block;
+  text-overflow: ellipsis;
+  padding: 0.5em 1em;
+  margin-bottom: 1em;
+  -webkit-transition: color 0.3s, border-color 0.3s;
+          transition: color 0.3s, border-color 0.3s; }
+  input[type='text']:invalid,
+  input[type='tel']:invalid,
+  input[type='email']:invalid,
+  input[type='search']:invalid,
+  input[type='password']:invalid,
+  textarea:invalid {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid red;
+    color: red; }
+  input[type='text']:focus::-webkit-input-placeholder,
+  input[type='tel']:focus::-webkit-input-placeholder,
+  input[type='email']:focus::-webkit-input-placeholder,
+  input[type='search']:focus::-webkit-input-placeholder,
+  input[type='password']:focus::-webkit-input-placeholder,
+  textarea:focus::-webkit-input-placeholder {
+    color: #898998; }
+  input[type='text']:focus::-moz-placeholder,
+  input[type='tel']:focus::-moz-placeholder,
+  input[type='email']:focus::-moz-placeholder,
+  input[type='search']:focus::-moz-placeholder,
+  input[type='password']:focus::-moz-placeholder,
+  textarea:focus::-moz-placeholder {
+    opacity: 1;
+    color: #898998; }
+  input[type='text']:focus:-moz-placeholder,
+  input[type='tel']:focus:-moz-placeholder,
+  input[type='email']:focus:-moz-placeholder,
+  input[type='search']:focus:-moz-placeholder,
+  input[type='password']:focus:-moz-placeholder,
+  textarea:focus:-moz-placeholder {
+    color: #898998; }
+  input[type='text']:focus:-ms-input-placeholder,
+  input[type='tel']:focus:-ms-input-placeholder,
+  input[type='email']:focus:-ms-input-placeholder,
+  input[type='search']:focus:-ms-input-placeholder,
+  input[type='password']:focus:-ms-input-placeholder,
+  textarea:focus:-ms-input-placeholder {
+    color: #898998; }
+  input[type='text']:focus.placeholder,
+  input[type='tel']:focus.placeholder,
+  input[type='email']:focus.placeholder,
+  input[type='search']:focus.placeholder,
+  input[type='password']:focus.placeholder,
+  textarea:focus.placeholder {
+    color: #898998; }
+  input[type='text']::-webkit-input-placeholder,
+  input[type='tel']::-webkit-input-placeholder,
+  input[type='email']::-webkit-input-placeholder,
+  input[type='search']::-webkit-input-placeholder,
+  input[type='password']::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: #fff; }
+  input[type='text']::-moz-placeholder,
+  input[type='tel']::-moz-placeholder,
+  input[type='email']::-moz-placeholder,
+  input[type='search']::-moz-placeholder,
+  input[type='password']::-moz-placeholder,
+  textarea::-moz-placeholder {
+    opacity: 1;
+    color: #fff; }
+  input[type='text']:-moz-placeholder,
+  input[type='tel']:-moz-placeholder,
+  input[type='email']:-moz-placeholder,
+  input[type='search']:-moz-placeholder,
+  input[type='password']:-moz-placeholder,
+  textarea:-moz-placeholder {
+    color: #fff; }
+  input[type='text']:-ms-input-placeholder,
+  input[type='tel']:-ms-input-placeholder,
+  input[type='email']:-ms-input-placeholder,
+  input[type='search']:-ms-input-placeholder,
+  input[type='password']:-ms-input-placeholder,
+  textarea:-ms-input-placeholder {
+    color: #fff; }
+  input[type='text'].placeholder,
+  input[type='tel'].placeholder,
+  input[type='email'].placeholder,
+  input[type='search'].placeholder,
+  input[type='password'].placeholder,
+  textarea.placeholder {
+    color: #fff; }
+
+select {
+  -webkit-border-radius: 0;
+  color: #000; }
+
+textarea {
+  resize: none;
+  vertical-align: top;
+  width: 100%; }
+
+button,
+input[type='button'],
+input[type='reset'],
+input[type='file'],
+input[type='submit'] {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer; }
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6,
+.h {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0 0 .5em; }
+  @media (min-width: 768px) {
+    h1,
+    .h1,
+    h2,
+    .h2,
+    h3,
+    .h3,
+    h4,
+    .h4,
+    h5,
+    .h5,
+    h6,
+    .h6,
+    .h {
+      margin-bottom: 1em; } }
+
+h1,
+.h1 {
+  font-size: 2rem; }
+
+h2,
+.h2 {
+  font-size: 1.5rem; }
+
+h3,
+.h3 {
+  font-size: 1.25rem; }
+
+h4,
+.h4 {
+  font-size: 1.125rem; }
+
+h5,
+.h5 {
+  font-size: 1rem; }
+
+h6,
+.h6 {
+  font-size: .8rem; }
+
+p {
+  margin: 0 0 1.2em; }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  -webkit-transition: color 0.3s, background-color 0.3s, border-color 0.3s;
+          transition: color 0.3s, background-color 0.3s, border-color 0.3s; }
+  a:hover {
+    color: green; }
+
+#app {
+  position: relative;
+  overflow: hidden;
+  max-width: 100vw; }
+  @media (min-width: 1024px) {
+    #app {
+      height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas: "header header 	header" "main 	main 	main" "footer footer 	footer"; } }
+
+.app_header {
+  grid-area: header; }
+
+.app_main {
+  grid-area: main; }
+
+.app_footer {
+  grid-area: footer; }
+
+ul:not([id]):not([class]) {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px; }
+  ul:not([id]):not([class]) > li {
+    padding-left: 0;
+    margin-bottom: 5px; }
+    @media (min-width: 768px) {
+      ul:not([id]):not([class]) > li {
+        margin-bottom: 0; } }
+    ul:not([id]):not([class]) > li:before {
+      content: "";
+      display: inline-block;
+      border: 4px solid transparent;
+      border-left: 4px solid #898998;
+      margin-right: 7px; }
+
+.btn {
+  padding: .5em 1em;
+  border-radius: 12px;
+  color: green; }
+  .btn--alert {
+    background-color: red; }
+
+.app_main {
+  padding-top: 30px;
+  width: 100%;
+  background-color: #343436;
+  overflow: hidden; }
+  @media (min-width: 1024px) {
+    .app_main {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column; } }
+
+/*---------TABS---------*/
+.app_tab-list {
+  padding: 0 30px;
+  margin: 0 0 -1px;
+  list-style-type: none; }
+
+.app_tab {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0 -5px;
+  position: relative; }
+  .app_tab.active {
+    z-index: 1; }
+
+.btn-tab {
+  background-color: transparent;
+  padding: .5em 1.5em;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative;
+  -webkit-perspective: 100px;
+          perspective: 100px; }
+  .btn-tab:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 160%;
+    width: 100%;
+    border: 2px solid rgba(170, 170, 170, 0.25);
+    border-bottom-width: 1px;
+    background: #343436;
+    -webkit-transform: rotateX(40deg);
+            transform: rotateX(40deg);
+    -webkit-transform-origin: 50% 100%;
+        -ms-transform-origin: 50% 100%;
+            transform-origin: 50% 100%;
+    border-radius: 12px 12px 0 0; }
+  .btn-tab span {
+    position: relative; }
+  .btn-tab:hover:before {
+    background: #1A1C1D; }
+  .active .btn-tab:before {
+    background: #1A1C1D;
+    border-color: rgba(255, 255, 255, 0.25);
+    border-bottom: 1px solid #1A1C1D; }
+
+/*---------TAB Content---------*/
+.app_component-box {
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  background-color: #1A1C1D; }
+
+.app_tab-content {
+  height: 7em;
+  padding: 15px 30px 0;
+  margin: 0;
+  list-style-type: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start; }
+
+.app_component {
+  display: inline-block;
+  width: 10%;
+  padding: 0 10px 10px 0; }
+  .app_component label {
+    cursor: pointer; }
+
+/*---------RESULT---------*/
+.app_result {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  overflow: hidden; }
+  @media (min-width: 1024px) {
+    .app_result {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex; } }
+  .app_result .hljs {
+    overflow-x: initial !important; }
+
+.result-item {
+  border: 5px solid #343436;
+  background-color: #1D1F20; }
+  @media (min-width: 1024px) {
+    .result-item {
+      -webkit-box-flex: 1;
+      -webkit-flex: 1 1 33.33%;
+          -ms-flex: 1 1 33.33%;
+              flex: 1 1 33.33%;
+      max-width: 33.33%;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+              flex-direction: column; } }
+  .result-item .heading {
+    background-color: #1A1C1D;
+    color: #ccc;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 5px 25px; }
+    .result-item .heading > * {
+      margin-bottom: 0; }
+  .result-item textarea {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+    margin-bottom: 0; }
+  .result-item pre {
+    overflow: initial; }
+
+.result-box {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  overflow: auto;
+  font-size: 15px;
+  font-weight: 600; }
+
+/*---------POPUP---------*/
+.popup {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 100; }
+
+.popup_box {
+  position: absolute;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 95vw;
+  height: 95vh;
+  padding: 30px;
+  background-color: #1A1C1D; }
+
+.popup_foot {
+  padding-top: 1em;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.app_footer {
+  padding: 10px 30px;
+  font-size: .875rem;
+  background: -webkit-linear-gradient(0deg, #5b5b5b, #545454);
+  background: linear-gradient(90deg, #5b5b5b, #545454);
+  border-top: 1px solid #7d7d7d;
+  color: #fff; }
+  @media (min-width: 768px) {
+    .app_footer {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+          -ms-flex-pack: justify;
+              justify-content: space-between; } }
+
+/*!
+ * Agate by Taufik Nurrohman <https://github.com/tovic>
+ * ----------------------------------------------------
+ *
+ * #ade5fc
+ * #a2fca2
+ * #c6b4f0
+ * #d36363
+ * #fcc28c
+ * #fc9b9b
+ * #ffa
+ * #fff
+ * #333
+ * #62c8f3
+ * #888
+ *
+ */
+.agate .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #333;
+  color: white; }
+.agate .hljs-name,
+.agate .hljs-strong {
+  font-weight: bold; }
+.agate .hljs-code,
+.agate .hljs-emphasis {
+  font-style: italic; }
+.agate .hljs-tag {
+  color: #62c8f3; }
+.agate .hljs-variable,
+.agate .hljs-template-variable,
+.agate .hljs-selector-id,
+.agate .hljs-selector-class {
+  color: #ade5fc; }
+.agate .hljs-string,
+.agate .hljs-bullet {
+  color: #a2fca2; }
+.agate .hljs-type,
+.agate .hljs-title,
+.agate .hljs-section,
+.agate .hljs-attribute,
+.agate .hljs-quote,
+.agate .hljs-built_in,
+.agate .hljs-builtin-name {
+  color: #ffa; }
+.agate .hljs-number,
+.agate .hljs-symbol,
+.agate .hljs-bullet {
+  color: #d36363; }
+.agate .hljs-keyword,
+.agate .hljs-selector-tag,
+.agate .hljs-literal {
+  color: #fcc28c; }
+.agate .hljs-comment,
+.agate .hljs-deletion,
+.agate .hljs-code {
+  color: #888; }
+.agate .hljs-regexp,
+.agate .hljs-link {
+  color: #c6b4f0; }
+.agate .hljs-meta {
+  color: #fc9b9b; }
+.agate .hljs-deletion {
+  background-color: #fc9b9b;
+  color: #333; }
+.agate .hljs-addition {
+  background-color: #a2fca2;
+  color: #333; }
+.agate .hljs a {
+  color: inherit; }
+.agate .hljs a:focus,
+.agate .hljs a:hover {
+  color: inherit;
+  text-decoration: underline; }
+
+/*
+Date: 24 Fev 2015
+Author: Pedro Oliveira <kanytu@gmail . com>
+*/
+.androidstudio .hljs {
+  color: #a9b7c6;
+  background: #282b2e;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em; }
+.androidstudio .hljs-number,
+.androidstudio .hljs-literal,
+.androidstudio .hljs-symbol,
+.androidstudio .hljs-bullet {
+  color: #6897BB; }
+.androidstudio .hljs-keyword,
+.androidstudio .hljs-selector-tag,
+.androidstudio .hljs-deletion {
+  color: #cc7832; }
+.androidstudio .hljs-variable,
+.androidstudio .hljs-template-variable,
+.androidstudio .hljs-link {
+  color: #629755; }
+.androidstudio .hljs-comment,
+.androidstudio .hljs-quote {
+  color: #808080; }
+.androidstudio .hljs-meta {
+  color: #bbb529; }
+.androidstudio .hljs-string,
+.androidstudio .hljs-attribute,
+.androidstudio .hljs-addition {
+  color: #6A8759; }
+.androidstudio .hljs-section,
+.androidstudio .hljs-title,
+.androidstudio .hljs-type {
+  color: #ffc66d; }
+.androidstudio .hljs-name,
+.androidstudio .hljs-selector-id,
+.androidstudio .hljs-selector-class {
+  color: #e8bf6a; }
+.androidstudio .hljs-emphasis {
+  font-style: italic; }
+.androidstudio .hljs-strong {
+  font-weight: bold; }
+
+/* Base16 Atelier Savanna Dark - Theme */
+/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/savanna) */
+/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
+/* Atelier-Savanna Comment */
+.atelier-savanna-dark {
+  /* Atelier-Savanna Red */
+  /* Atelier-Savanna Orange */
+  /* Atelier-Savanna Green */
+  /* Atelier-Savanna Blue */
+  /* Atelier-Savanna Purple */ }
+  .atelier-savanna-dark .hljs-comment,
+  .atelier-savanna-dark .hljs-quote {
+    color: #78877d; }
+  .atelier-savanna-dark .hljs-variable,
+  .atelier-savanna-dark .hljs-template-variable,
+  .atelier-savanna-dark .hljs-attribute,
+  .atelier-savanna-dark .hljs-tag,
+  .atelier-savanna-dark .hljs-name,
+  .atelier-savanna-dark .hljs-regexp,
+  .atelier-savanna-dark .hljs-link,
+  .atelier-savanna-dark .hljs-name,
+  .atelier-savanna-dark .hljs-selector-id,
+  .atelier-savanna-dark .hljs-selector-class {
+    color: #b16139; }
+  .atelier-savanna-dark .hljs-number,
+  .atelier-savanna-dark .hljs-meta,
+  .atelier-savanna-dark .hljs-built_in,
+  .atelier-savanna-dark .hljs-builtin-name,
+  .atelier-savanna-dark .hljs-literal,
+  .atelier-savanna-dark .hljs-type,
+  .atelier-savanna-dark .hljs-params {
+    color: #9f713c; }
+  .atelier-savanna-dark .hljs-string,
+  .atelier-savanna-dark .hljs-symbol,
+  .atelier-savanna-dark .hljs-bullet {
+    color: #489963; }
+  .atelier-savanna-dark .hljs-title,
+  .atelier-savanna-dark .hljs-section {
+    color: #478c90; }
+  .atelier-savanna-dark .hljs-keyword,
+  .atelier-savanna-dark .hljs-selector-tag {
+    color: #55859b; }
+  .atelier-savanna-dark .hljs-deletion,
+  .atelier-savanna-dark .hljs-addition {
+    color: #171c19;
+    display: inline-block;
+    width: 100%; }
+  .atelier-savanna-dark .hljs-deletion {
+    background-color: #b16139; }
+  .atelier-savanna-dark .hljs-addition {
+    background-color: #489963; }
+  .atelier-savanna-dark .hljs {
+    display: block;
+    overflow-x: auto;
+    background: #171c19;
+    color: #87928a;
+    padding: 0.5em; }
+  .atelier-savanna-dark .hljs-emphasis {
+    font-style: italic; }
+  .atelier-savanna-dark .hljs-strong {
+    font-weight: bold; }
+
+/* Base16 Atelier Savanna Light - Theme */
+/* by Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/savanna) */
+/* Original Base16 color scheme by Chris Kempson (https://github.com/chriskempson/base16) */
+.atelier-savanna-light {
+  /* Atelier-Savanna Comment */
+  /* Atelier-Savanna Red */
+  /* Atelier-Savanna Orange */
+  /* Atelier-Savanna Green */
+  /* Atelier-Savanna Blue */
+  /* Atelier-Savanna Purple */ }
+  .atelier-savanna-light .hljs-comment,
+  .atelier-savanna-light .hljs-quote {
+    color: #5f6d64; }
+  .atelier-savanna-light .hljs-variable,
+  .atelier-savanna-light .hljs-template-variable,
+  .atelier-savanna-light .hljs-attribute,
+  .atelier-savanna-light .hljs-tag,
+  .atelier-savanna-light .hljs-name,
+  .atelier-savanna-light .hljs-regexp,
+  .atelier-savanna-light .hljs-link,
+  .atelier-savanna-light .hljs-name,
+  .atelier-savanna-light .hljs-selector-id,
+  .atelier-savanna-light .hljs-selector-class {
+    color: #b16139; }
+  .atelier-savanna-light .hljs-number,
+  .atelier-savanna-light .hljs-meta,
+  .atelier-savanna-light .hljs-built_in,
+  .atelier-savanna-light .hljs-builtin-name,
+  .atelier-savanna-light .hljs-literal,
+  .atelier-savanna-light .hljs-type,
+  .atelier-savanna-light .hljs-params {
+    color: #9f713c; }
+  .atelier-savanna-light .hljs-string,
+  .atelier-savanna-light .hljs-symbol,
+  .atelier-savanna-light .hljs-bullet {
+    color: #489963; }
+  .atelier-savanna-light .hljs-title,
+  .atelier-savanna-light .hljs-section {
+    color: #478c90; }
+  .atelier-savanna-light .hljs-keyword,
+  .atelier-savanna-light .hljs-selector-tag {
+    color: #55859b; }
+  .atelier-savanna-light .hljs-deletion,
+  .atelier-savanna-light .hljs-addition {
+    color: #171c19;
+    display: inline-block;
+    width: 100%; }
+  .atelier-savanna-light .hljs-deletion {
+    background-color: #b16139; }
+  .atelier-savanna-light .hljs-addition {
+    background-color: #489963; }
+  .atelier-savanna-light .hljs {
+    display: block;
+    overflow-x: auto;
+    background: #ecf4ee;
+    color: #526057;
+    padding: 0.5em; }
+  .atelier-savanna-light .hljs-emphasis {
+    font-style: italic; }
+  .atelier-savanna-light .hljs-strong {
+    font-weight: bold; }
+
+/*
+
+Atom One Dark by Daniel Gamage
+Original One Dark Syntax theme from https://github.com/atom/one-dark-syntax
+
+base:    #282c34
+mono-1:  #abb2bf
+mono-2:  #818896
+mono-3:  #5c6370
+hue-1:   #56b6c2
+hue-2:   #61aeee
+hue-3:   #c678dd
+hue-4:   #98c379
+hue-5:   #e06c75
+hue-5-2: #be5046
+hue-6:   #d19a66
+hue-6-2: #e6c07b
+
+*/
+.atom-one-dark .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #abb2bf;
+  background: #282c34; }
+.atom-one-dark .hljs-comment,
+.atom-one-dark .hljs-quote {
+  color: #5c6370;
+  font-style: italic; }
+.atom-one-dark .hljs-doctag,
+.atom-one-dark .hljs-keyword,
+.atom-one-dark .hljs-formula {
+  color: #c678dd; }
+.atom-one-dark .hljs-section,
+.atom-one-dark .hljs-name,
+.atom-one-dark .hljs-selector-tag,
+.atom-one-dark .hljs-deletion,
+.atom-one-dark .hljs-subst {
+  color: #e06c75; }
+.atom-one-dark .hljs-literal {
+  color: #56b6c2; }
+.atom-one-dark .hljs-string,
+.atom-one-dark .hljs-regexp,
+.atom-one-dark .hljs-addition,
+.atom-one-dark .hljs-attribute,
+.atom-one-dark .hljs-meta-string {
+  color: #98c379; }
+.atom-one-dark .hljs-built_in,
+.atom-one-dark .hljs-class .hljs-title {
+  color: #e6c07b; }
+.atom-one-dark .hljs-attr,
+.atom-one-dark .hljs-variable,
+.atom-one-dark .hljs-template-variable,
+.atom-one-dark .hljs-type,
+.atom-one-dark .hljs-selector-class,
+.atom-one-dark .hljs-selector-attr,
+.atom-one-dark .hljs-selector-pseudo,
+.atom-one-dark .hljs-number {
+  color: #d19a66; }
+.atom-one-dark .hljs-symbol,
+.atom-one-dark .hljs-bullet,
+.atom-one-dark .hljs-link,
+.atom-one-dark .hljs-meta,
+.atom-one-dark .hljs-selector-id,
+.atom-one-dark .hljs-title {
+  color: #61aeee; }
+.atom-one-dark .hljs-emphasis {
+  font-style: italic; }
+.atom-one-dark .hljs-strong {
+  font-weight: bold; }
+.atom-one-dark .hljs-link {
+  text-decoration: underline; }
+
+/*
+
+Atom One Light by Daniel Gamage
+Original One Light Syntax theme from https://github.com/atom/one-light-syntax
+
+base:    #fafafa
+mono-1:  #383a42
+mono-2:  #686b77
+mono-3:  #a0a1a7
+hue-1:   #0184bb
+hue-2:   #4078f2
+hue-3:   #a626a4
+hue-4:   #50a14f
+hue-5:   #e45649
+hue-5-2: #c91243
+hue-6:   #986801
+hue-6-2: #c18401
+
+*/
+.atom-one-light .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #383a42;
+  background: #fafafa; }
+.atom-one-light .hljs-comment,
+.atom-one-light .hljs-quote {
+  color: #a0a1a7;
+  font-style: italic; }
+.atom-one-light .hljs-doctag,
+.atom-one-light .hljs-keyword,
+.atom-one-light .hljs-formula {
+  color: #a626a4; }
+.atom-one-light .hljs-section,
+.atom-one-light .hljs-name,
+.atom-one-light .hljs-selector-tag,
+.atom-one-light .hljs-deletion,
+.atom-one-light .hljs-subst {
+  color: #e45649; }
+.atom-one-light .hljs-literal {
+  color: #0184bb; }
+.atom-one-light .hljs-string,
+.atom-one-light .hljs-regexp,
+.atom-one-light .hljs-addition,
+.atom-one-light .hljs-attribute,
+.atom-one-light .hljs-meta-string {
+  color: #50a14f; }
+.atom-one-light .hljs-built_in,
+.atom-one-light .hljs-class .hljs-title {
+  color: #c18401; }
+.atom-one-light .hljs-attr,
+.atom-one-light .hljs-variable,
+.atom-one-light .hljs-template-variable,
+.atom-one-light .hljs-type,
+.atom-one-light .hljs-selector-class,
+.atom-one-light .hljs-selector-attr,
+.atom-one-light .hljs-selector-pseudo,
+.atom-one-light .hljs-number {
+  color: #986801; }
+.atom-one-light .hljs-symbol,
+.atom-one-light .hljs-bullet,
+.atom-one-light .hljs-link,
+.atom-one-light .hljs-meta,
+.atom-one-light .hljs-selector-id,
+.atom-one-light .hljs-title {
+  color: #4078f2; }
+.atom-one-light .hljs-emphasis {
+  font-style: italic; }
+.atom-one-light .hljs-strong {
+  font-weight: bold; }
+.atom-one-light .hljs-link {
+  text-decoration: underline; }
+
+/*
+  codepen.io Embed Theme
+  Author: Justin Perry <http://github.com/ourmaninamsterdam>
+  Original theme - https://github.com/chriskempson/tomorrow-theme
+*/
+.codepen-embed .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #222;
+  color: #fff; }
+.codepen-embed .hljs-comment,
+.codepen-embed .hljs-quote {
+  color: #777; }
+.codepen-embed .hljs-variable,
+.codepen-embed .hljs-template-variable,
+.codepen-embed .hljs-tag,
+.codepen-embed .hljs-regexp,
+.codepen-embed .hljs-meta,
+.codepen-embed .hljs-number,
+.codepen-embed .hljs-built_in,
+.codepen-embed .hljs-builtin-name,
+.codepen-embed .hljs-literal,
+.codepen-embed .hljs-params,
+.codepen-embed .hljs-symbol,
+.codepen-embed .hljs-bullet,
+.codepen-embed .hljs-link,
+.codepen-embed .hljs-deletion {
+  color: #ab875d; }
+.codepen-embed .hljs-section,
+.codepen-embed .hljs-title,
+.codepen-embed .hljs-name,
+.codepen-embed .hljs-selector-id,
+.codepen-embed .hljs-selector-class,
+.codepen-embed .hljs-type,
+.codepen-embed .hljs-attribute {
+  color: #9b869b; }
+.codepen-embed .hljs-string,
+.codepen-embed .hljs-keyword,
+.codepen-embed .hljs-selector-tag,
+.codepen-embed .hljs-addition {
+  color: #8f9c6c; }
+.codepen-embed .hljs-emphasis {
+  font-style: italic; }
+.codepen-embed .hljs-strong {
+  font-weight: bold; }
+
+/*
+
+Colorbrewer theme
+Original: https://github.com/mbostock/colorbrewer-theme (c) Mike Bostock <mike@ocks.org>
+Ported by Fabr├нcio Tavares de Oliveira
+
+*/
+.color-brewer .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #fff; }
+.color-brewer .hljs,
+.color-brewer .hljs-subst {
+  color: #000; }
+.color-brewer .hljs-string,
+.color-brewer .hljs-meta,
+.color-brewer .hljs-symbol,
+.color-brewer .hljs-template-tag,
+.color-brewer .hljs-template-variable,
+.color-brewer .hljs-addition {
+  color: #756bb1; }
+.color-brewer .hljs-comment,
+.color-brewer .hljs-quote {
+  color: #636363; }
+.color-brewer .hljs-number,
+.color-brewer .hljs-regexp,
+.color-brewer .hljs-literal,
+.color-brewer .hljs-bullet,
+.color-brewer .hljs-link {
+  color: #31a354; }
+.color-brewer .hljs-deletion,
+.color-brewer .hljs-variable {
+  color: #88f; }
+.color-brewer .hljs-keyword,
+.color-brewer .hljs-selector-tag,
+.color-brewer .hljs-title,
+.color-brewer .hljs-section,
+.color-brewer .hljs-built_in,
+.color-brewer .hljs-doctag,
+.color-brewer .hljs-type,
+.color-brewer .hljs-tag,
+.color-brewer .hljs-name,
+.color-brewer .hljs-selector-id,
+.color-brewer .hljs-selector-class,
+.color-brewer .hljs-strong {
+  color: #3182bd; }
+.color-brewer .hljs-emphasis {
+  font-style: italic; }
+.color-brewer .hljs-attribute {
+  color: #e6550d; }
+
+/*
+
+Darcula color scheme from the JetBrains family of IDEs
+
+*/
+.darcula .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #2b2b2b; }
+.darcula .hljs {
+  color: #bababa; }
+.darcula .hljs-strong,
+.darcula .hljs-emphasis {
+  color: #a8a8a2; }
+.darcula .hljs-bullet,
+.darcula .hljs-quote,
+.darcula .hljs-link,
+.darcula .hljs-number,
+.darcula .hljs-regexp,
+.darcula .hljs-literal {
+  color: #6896ba; }
+.darcula .hljs-code,
+.darcula .hljs-selector-class {
+  color: #a6e22e; }
+.darcula .hljs-emphasis {
+  font-style: italic; }
+.darcula .hljs-keyword,
+.darcula .hljs-selector-tag,
+.darcula .hljs-section,
+.darcula .hljs-attribute,
+.darcula .hljs-name,
+.darcula .hljs-variable {
+  color: #cb7832; }
+.darcula .hljs-params {
+  color: #b9b9b9; }
+.darcula .hljs-string {
+  color: #6a8759; }
+.darcula .hljs-subst,
+.darcula .hljs-type,
+.darcula .hljs-built_in,
+.darcula .hljs-builtin-name,
+.darcula .hljs-symbol,
+.darcula .hljs-selector-id,
+.darcula .hljs-selector-attr,
+.darcula .hljs-selector-pseudo,
+.darcula .hljs-template-tag,
+.darcula .hljs-template-variable,
+.darcula .hljs-addition {
+  color: #e0c46c; }
+.darcula .hljs-comment,
+.darcula .hljs-deletion,
+.darcula .hljs-meta {
+  color: #7f7f7f; }
+
+/*
+Description: Foundation 4 docs style for highlight.js
+Author: Dan Allen <dan.j.allen@gmail.com>
+Website: http://foundation.zurb.com/docs/
+Version: 1.0
+Date: 2013-04-02
+*/
+.foundation .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #eee;
+  color: black; }
+.foundation .hljs-link,
+.foundation .hljs-emphasis,
+.foundation .hljs-attribute,
+.foundation .hljs-addition {
+  color: #070; }
+.foundation .hljs-emphasis {
+  font-style: italic; }
+.foundation .hljs-strong,
+.foundation .hljs-string,
+.foundation .hljs-deletion {
+  color: #d14; }
+.foundation .hljs-strong {
+  font-weight: bold; }
+.foundation .hljs-quote,
+.foundation .hljs-comment {
+  color: #998;
+  font-style: italic; }
+.foundation .hljs-section,
+.foundation .hljs-title {
+  color: #900; }
+.foundation .hljs-class .hljs-title,
+.foundation .hljs-type {
+  color: #458; }
+.foundation .hljs-variable,
+.foundation .hljs-template-variable {
+  color: #336699; }
+.foundation .hljs-bullet {
+  color: #997700; }
+.foundation .hljs-meta {
+  color: #3344bb; }
+.foundation .hljs-code,
+.foundation .hljs-number,
+.foundation .hljs-literal,
+.foundation .hljs-keyword,
+.foundation .hljs-selector-tag {
+  color: #099; }
+.foundation .hljs-regexp {
+  background-color: #fff0ff;
+  color: #880088; }
+.foundation .hljs-symbol {
+  color: #990073; }
+.foundation .hljs-tag,
+.foundation .hljs-name,
+.foundation .hljs-selector-id,
+.foundation .hljs-selector-class {
+  color: #007700; }
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+.github .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8; }
+.github .hljs-comment,
+.github .hljs-quote {
+  color: #998;
+  font-style: italic; }
+.github .hljs-keyword,
+.github .hljs-selector-tag,
+.github .hljs-subst {
+  color: #333;
+  font-weight: bold; }
+.github .hljs-number,
+.github .hljs-literal,
+.github .hljs-variable,
+.github .hljs-template-variable,
+.github .hljs-tag .hljs-attr {
+  color: #008080; }
+.github .hljs-string,
+.github .hljs-doctag {
+  color: #d14; }
+.github .hljs-title,
+.github .hljs-section,
+.github .hljs-selector-id {
+  color: #900;
+  font-weight: bold; }
+.github .hljs-subst {
+  font-weight: normal; }
+.github .hljs-type,
+.github .hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold; }
+.github .hljs-tag,
+.github .hljs-name,
+.github .hljs-attribute {
+  color: #000080;
+  font-weight: normal; }
+.github .hljs-regexp,
+.github .hljs-link {
+  color: #009926; }
+.github .hljs-symbol,
+.github .hljs-bullet {
+  color: #990073; }
+.github .hljs-built_in,
+.github .hljs-builtin-name {
+  color: #0086b3; }
+.github .hljs-meta {
+  color: #999;
+  font-weight: bold; }
+.github .hljs-deletion {
+  background: #fdd; }
+.github .hljs-addition {
+  background: #dfd; }
+.github .hljs-emphasis {
+  font-style: italic; }
+.github .hljs-strong {
+  font-weight: bold; }
+
+/**
+ * GitHub Gist Theme
+ * Author : Louis Barranqueiro - https://github.com/LouisBarranqueiro
+ */
+.github-gist .hljs {
+  display: block;
+  background: white;
+  padding: 0.5em;
+  color: #333333;
+  overflow-x: auto; }
+.github-gist .hljs-comment,
+.github-gist .hljs-meta {
+  color: #969896; }
+.github-gist .hljs-string,
+.github-gist .hljs-variable,
+.github-gist .hljs-template-variable,
+.github-gist .hljs-strong,
+.github-gist .hljs-emphasis,
+.github-gist .hljs-quote {
+  color: #df5000; }
+.github-gist .hljs-keyword,
+.github-gist .hljs-selector-tag,
+.github-gist .hljs-type {
+  color: #a71d5d; }
+.github-gist .hljs-literal,
+.github-gist .hljs-symbol,
+.github-gist .hljs-bullet,
+.github-gist .hljs-attribute {
+  color: #0086b3; }
+.github-gist .hljs-section,
+.github-gist .hljs-name {
+  color: #63a35c; }
+.github-gist .hljs-tag {
+  color: #333333; }
+.github-gist .hljs-title,
+.github-gist .hljs-attr,
+.github-gist .hljs-selector-id,
+.github-gist .hljs-selector-class,
+.github-gist .hljs-selector-attr,
+.github-gist .hljs-selector-pseudo {
+  color: #795da3; }
+.github-gist .hljs-addition {
+  color: #55a532;
+  background-color: #eaffea; }
+.github-gist .hljs-deletion {
+  color: #bd2c00;
+  background-color: #ffecec; }
+.github-gist .hljs-link {
+  text-decoration: underline; }
+
+/*
+
+Google Code style (c) Aahan Krish <geekpanth3r@gmail.com>
+
+*/
+.googlecode .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: white;
+  color: black; }
+.googlecode .hljs-comment,
+.googlecode .hljs-quote {
+  color: #800; }
+.googlecode .hljs-keyword,
+.googlecode .hljs-selector-tag,
+.googlecode .hljs-section,
+.googlecode .hljs-title,
+.googlecode .hljs-name {
+  color: #008; }
+.googlecode .hljs-variable,
+.googlecode .hljs-template-variable {
+  color: #660; }
+.googlecode .hljs-string,
+.googlecode .hljs-selector-attr,
+.googlecode .hljs-selector-pseudo,
+.googlecode .hljs-regexp {
+  color: #080; }
+.googlecode .hljs-literal,
+.googlecode .hljs-symbol,
+.googlecode .hljs-bullet,
+.googlecode .hljs-meta,
+.googlecode .hljs-number,
+.googlecode .hljs-link {
+  color: #066; }
+.googlecode .hljs-title,
+.googlecode .hljs-doctag,
+.googlecode .hljs-type,
+.googlecode .hljs-attr,
+.googlecode .hljs-built_in,
+.googlecode .hljs-builtin-name,
+.googlecode .hljs-params {
+  color: #606; }
+.googlecode .hljs-attribute,
+.googlecode .hljs-subst {
+  color: #000; }
+.googlecode .hljs-formula {
+  background-color: #eee;
+  font-style: italic; }
+.googlecode .hljs-selector-id,
+.googlecode .hljs-selector-class {
+  color: #9B703F; }
+.googlecode .hljs-addition {
+  background-color: #baeeba; }
+.googlecode .hljs-deletion {
+  background-color: #ffc8bd; }
+.googlecode .hljs-doctag,
+.googlecode .hljs-strong {
+  font-weight: bold; }
+.googlecode .hljs-emphasis {
+  font-style: italic; }
+
+/*
+
+Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-license.org/
+
+*/
+.monokai-sublime .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #23241f; }
+.monokai-sublime .hljs,
+.monokai-sublime .hljs-tag,
+.monokai-sublime .hljs-subst {
+  color: #f8f8f2; }
+.monokai-sublime .hljs-strong,
+.monokai-sublime .hljs-emphasis {
+  color: #a8a8a2; }
+.monokai-sublime .hljs-bullet,
+.monokai-sublime .hljs-quote,
+.monokai-sublime .hljs-number,
+.monokai-sublime .hljs-regexp,
+.monokai-sublime .hljs-literal,
+.monokai-sublime .hljs-link {
+  color: #ae81ff; }
+.monokai-sublime .hljs-code,
+.monokai-sublime .hljs-title,
+.monokai-sublime .hljs-section,
+.monokai-sublime .hljs-selector-class {
+  color: #a6e22e; }
+.monokai-sublime .hljs-strong {
+  font-weight: bold; }
+.monokai-sublime .hljs-emphasis {
+  font-style: italic; }
+.monokai-sublime .hljs-keyword,
+.monokai-sublime .hljs-selector-tag,
+.monokai-sublime .hljs-name,
+.monokai-sublime .hljs-attr {
+  color: #f92672; }
+.monokai-sublime .hljs-symbol,
+.monokai-sublime .hljs-attribute {
+  color: #66d9ef; }
+.monokai-sublime .hljs-params,
+.monokai-sublime .hljs-class .hljs-title {
+  color: #f8f8f2; }
+.monokai-sublime .hljs-string,
+.monokai-sublime .hljs-type,
+.monokai-sublime .hljs-built_in,
+.monokai-sublime .hljs-builtin-name,
+.monokai-sublime .hljs-selector-id,
+.monokai-sublime .hljs-selector-attr,
+.monokai-sublime .hljs-selector-pseudo,
+.monokai-sublime .hljs-addition,
+.monokai-sublime .hljs-variable,
+.monokai-sublime .hljs-template-variable {
+  color: #e6db74; }
+.monokai-sublime .hljs-comment,
+.monokai-sublime .hljs-deletion,
+.monokai-sublime .hljs-meta {
+  color: #75715e; }
+
+/*# sourceMappingURL=style.css.map */

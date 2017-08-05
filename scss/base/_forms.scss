@@ -1,0 +1,65 @@
+// forms
+
+form,
+fieldset {
+  margin: 0;
+  padding: 0;
+  border-style: none;
+}
+
+input[type='text'],
+input[type='tel'],
+input[type='email'],
+input[type='search'],
+input[type='password'],
+//input[type='url'],
+// input[type='date'],
+textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  box-sizing: border-box;
+  border: none;
+  background-color: #444;
+  outline: none;
+  display: inline-block;
+  text-overflow: ellipsis;
+  padding: 0.5em 1em;
+  margin-bottom: 1em;
+  transition: color $as, border-color $as;
+  &:invalid {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid $errore;
+    color: $errore;
+  }
+  &:focus {
+     @include placeholder {
+      color: $dark;
+    }
+  }
+  @include placeholder {
+    color: #fff;
+  }
+}
+
+select {
+  -webkit-border-radius: 0;
+  color: #000;
+}
+
+textarea {
+  resize: none;
+  vertical-align: top;
+  width: 100%;
+}
+
+button,
+input[type='button'],
+input[type='reset'],
+input[type='file'],
+input[type='submit'] {
+  border: none;
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
