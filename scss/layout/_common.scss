@@ -59,4 +59,8 @@ ul:not([id]):not([class]) {
 	&--alert {
 		background-color: red;
 	}
+	&--edit {
+		background-color: transparent;
+		margin-left: 1em;
+	}
 }

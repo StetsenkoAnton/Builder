@@ -87,6 +87,7 @@
 	display: inline-block;
 	width: 10%;
 	padding: 0 10px 10px 0;
+	white-space: nowrap;
 	label {
 		cursor: pointer;
 	}
@@ -134,8 +135,7 @@
 .result-box {
 	flex: 1 1 auto;
 	overflow: auto;
-	font-size: 15px;
-	font-weight: 600;
+	font-size: .875rem;
 }
 /*---------POPUP---------*/
 .popup {

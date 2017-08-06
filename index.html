@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>BUILD</title>
+	<title>Template constructor</title>
 	<link media="all" rel="stylesheet" href="scss/style.css">
 	
 </head>
@@ -21,16 +21,21 @@
 						v-bind:class="{active: tabSelect == 'tab'+index}">
 						<button class="btn-tab" type="button" 
 								v-on:click="tabSelect = 'tab'+index"
-								v-bind:contenteditable="editMode">
+								v-on:dblclick = "tabEdit = 'tabEdit'+index">
 							<span>{{ tab.tabName }}</span>
 						</button>
-						<button class="edit-tab" type="button"
-								v-if="editMode"	
-								>Edit</button>
+						<div v-if="tabEdit == 'tabEdit'+index">
+							<input type="text"  
+									v-model="tab.tabName"
+									v-on:blur="cancelTab"
+									v-on:change="saveTab">
+							<button class="btn--edit icon-trash-o" type="button" 
+									v-on:click="popupDeleteTab = true;"></button>
+						</div>
 					</li>
 					<li class="app_tab">
 						<button class="btn-tab" type="button" v-on:click="addTab">
-							<span>+</span>
+							<span class="icon-folder-plus"></span>
 						</button>
 					</li>
 				</ul>
@@ -43,6 +48,10 @@
 								<input type="checkbox" class="checkbox" v-model="box.boxShow">
 								{{ box.boxName }}
 							</label>
+							<button class="btn--edit" type="button"
+									v-if="editMode"
+									v-on:click="popupEditShow = true"	
+								><span class="icon-edit"></span></button>
 						</li>
 						<li>
 							<button type="button" class="btn btn-white" v-on:click="openPopup(tab.tabBox)" >+</button>
@@ -106,7 +115,10 @@
 			</section>
 		</main>
 		<footer class="app_footer">
-			<span class="copyright"><a href="https://github.com/StetsenkoAnton/Builder/issues">Add issue</a></span>
+			<a href="https://github.com/StetsenkoAnton/Builder/issues">
+				<span class="icon-bug2"></span>
+				<span>Add issue</span>
+			</a>
 			<div>
 				<label>
 					<span>Edit mode</span>
@@ -114,7 +126,7 @@
 				</label>
 				
 				<span>Change style code</span>
-				<select name="" id="" v-model="styleSelect">
+				<select v-model="styleSelect">
 					<option value="agate">agate</option>
 					<option value="androidstudio">androidstudio</option>
 					<option value="atelier-savanna-dark">atelier-savanna-dark</option>
@@ -154,7 +166,7 @@
 					<div class="heading">
 					  <h4>SCSS</h4>
 					</div>
-					<textarea placeholder="CSS" v-model="popupModel.boxCss" emmet-syntax-css></textarea>
+					<textarea placeholder="CSS" v-model="popupModel.boxCss"></textarea>
 				  </div>
 				  <div class="result-item js-result">
 					<div class="heading">
@@ -168,6 +180,52 @@
 					<button class="btn" v-on:click="saveBox">Save</button>
 				</footer>
 			</div>
+		</section>
+		<section class="popup popup_new-template" 
+				v-if="popupEditShow">
+			<div class="popup_box">
+				<header class="popup_head">
+					<h1>Edit template</h1>
+					<label>
+						<input type="text" placeholder="Template name">
+					</label>
+					<button class="btn">Delete template</button>
+				</header>
+				<div class="app_result">
+				  <div class="result-item html-result">
+					<div class="heading">
+					  <h4>HTML</h4> 
+					</div>
+					<textarea placeholder="HTML"></textarea>
+				  </div>
+				  <div class="result-item css-result">
+					<div class="heading">
+					  <h4>SCSS</h4>
+					</div>
+					<textarea placeholder="CSS"></textarea>
+				  </div>
+				  <div class="result-item js-result">
+					<div class="heading">
+					  <h4>JS</h4>
+					</div>
+					<textarea placeholder="JS"></textarea>
+				  </div>
+				</div>
+				<footer class="popup_foot">
+					<button class="btn btn--alert" v-on:click="popupEditShow = false;">Cancel</button>
+					<button class="btn" v-on:click="saveBox">Save</button>
+				</footer>
+			</div>
+		</section>
+		<section class="popup popup_delete-tab" 
+				v-if="popupDeleteTab">
+				<div class="popup_box">
+					<h2>Удалить вкладку и все ее содержимое?</h2>
+					<footer class="popup_foot">
+						<button class="btn " title="delete new template" v-on:click="popupDeleteTab = false;">Cancel</button>
+						<button class="btn btn--alert" v-on:click="deleteTab">Удалить</button>
+					</footer>
+				</div>
 		</section>
 	</div>
 	<script src="js/vue.js"></script>
@@ -219,7 +277,10 @@
 	  el: '#app',
 	  data: {
 		tabSelect: 'tab0',
+		tabEdit: '',
+		popupDeleteTab: false,
 		popupShow: false,
+		popupEditShow: false,
 		styleSelect: 'atom-one-dark',
 		editMode: false,
 		menu: []
@@ -231,6 +292,20 @@
 				tabBox: []
 			}
 			this.menu.push(tab)
+		},
+		cancelTab: function (){
+			this.tabEdit = '';
+		},
+		saveTab: function (){
+			alert("save");
+			// this.writeBase();
+			// this.cancelTab;
+		},
+		deleteTab: function (n){
+			//this.menu.splice(n, 1);
+			// this.writeBase();
+			this.tabEdit = '';
+			this.popupDeleteTab = false;
 		},
 		cancelPopup: function (){
 			this.popupShow = false;
@@ -266,9 +341,10 @@
 	});
 	app.loadBase();
 
-	
-
 	</script>
 	
 </body>
 </html>
+
+1. как передать индекс в попап чтобы удалить?
+2. как поставить автофокус на input при удалении + фокус для гарячих клавиш?

@@ -34,8 +34,9 @@ $media-expressions: (
 
 @import 'vendors/include-media';
 @import 'vendors/normalize';
-@import 'base/variables';
+@import 'vendors/icons';
 
+@import 'base/variables';
 @import 'base/functions';
 @import 'base/mixins';
 @import 'base/helpers';
