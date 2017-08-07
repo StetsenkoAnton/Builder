@@ -22,7 +22,7 @@ html {
   /* 1 */
   -ms-text-size-adjust: 100%;
   /* 2 */
-  -webkit-text-size-adjust: 100%
+  -webkit-text-size-adjust: 100%;
   /* 2 */ }
 
 /**
@@ -64,7 +64,7 @@ progress,
 video {
   display: inline-block;
   /* 1 */
-  vertical-align: baseline
+  vertical-align: baseline;
   /* 2 */ }
 
 /**
@@ -183,7 +183,8 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   height: 0; }
 
 /**
@@ -224,7 +225,7 @@ textarea {
   /* 1 */
   font: inherit;
   /* 2 */
-  margin: 0
+  margin: 0;
   /* 3 */ }
 
 /**
@@ -256,7 +257,7 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
-  cursor: pointer
+  cursor: pointer;
   /* 3 */ }
 
 /**
@@ -290,9 +291,10 @@ input {
  */
 input[type="checkbox"],
 input[type="radio"] {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   /* 1 */
-  padding: 0
+  padding: 0;
   /* 2 */ }
 
 /**
@@ -311,7 +313,8 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  box-sizing: content-box
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
   /* 2 */ }
 
 /**
@@ -338,7 +341,7 @@ fieldset {
 legend {
   border: 0;
   /* 1 */
-  padding: 0
+  padding: 0;
   /* 2 */ }
 
 /**
@@ -494,13 +497,15 @@ th {
 html {
   font-size: 12px;
   line-height: 1.25;
-  box-sizing: border-box; }
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; }
   @media (min-width: 768px) {
     html {
       font-size: 15.996px; } }
 
 *, *:before, *:after {
-  box-sizing: inherit; }
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
 
 * {
   max-height: 1000000px; }
@@ -535,7 +540,8 @@ input[type='password'],
 textarea {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border: none;
   background-color: #444;
   outline: none;
@@ -544,7 +550,7 @@ textarea {
   padding: 0.5em 1em;
   margin-bottom: 1em;
   -webkit-transition: color 0.3s, border-color 0.3s;
-          transition: color 0.3s, border-color 0.3s; }
+  transition: color 0.3s, border-color 0.3s; }
   input[type='text']:invalid,
   input[type='tel']:invalid,
   input[type='email']:invalid,
@@ -552,7 +558,8 @@ textarea {
   input[type='password']:invalid,
   textarea:invalid {
     outline: none;
-    box-shadow: none;
+    -webkit-box-shadow: none;
+            box-shadow: none;
     border: 1px solid red;
     color: red; }
   input[type='text']:focus::-webkit-input-placeholder,
@@ -710,7 +717,7 @@ a {
   color: inherit;
   text-decoration: underline;
   -webkit-transition: color 0.3s, background-color 0.3s, border-color 0.3s;
-          transition: color 0.3s, background-color 0.3s, border-color 0.3s; }
+  transition: color 0.3s, background-color 0.3s, border-color 0.3s; }
   a:hover {
     color: green; }
 
@@ -770,12 +777,10 @@ ul:not([id]):not([class]) {
   @media (min-width: 1024px) {
     .app_main {
       display: -webkit-box;
-      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
           -ms-flex-direction: column;
               flex-direction: column; } }
 
@@ -788,20 +793,12 @@ ul:not([id]):not([class]) {
 .app_tab {
   display: inline-block;
   vertical-align: top;
+  text-align: center;
   margin: 0 -5px;
-  position: relative; }
-  .app_tab.active {
-    z-index: 1; }
-
-.btn-tab {
-  background-color: transparent;
-  padding: .5em 1.5em;
-  text-transform: uppercase;
-  color: #fff;
   position: relative;
   -webkit-perspective: 100px;
           perspective: 100px; }
-  .btn-tab:before {
+  .app_tab:before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -809,22 +806,55 @@ ul:not([id]):not([class]) {
     height: 160%;
     width: 100%;
     border: 2px solid rgba(170, 170, 170, 0.25);
+    border-top-width: 3px;
     border-bottom-width: 1px;
+    border-radius: 12px 12px 0 0;
     background: #343436;
     -webkit-transform: rotateX(40deg);
             transform: rotateX(40deg);
     -webkit-transform-origin: 50% 100%;
-        -ms-transform-origin: 50% 100%;
-            transform-origin: 50% 100%;
-    border-radius: 12px 12px 0 0; }
+            transform-origin: 50% 100%; }
+  .app_tab.active {
+    z-index: 1; }
+    .app_tab.active:before {
+      background: #1A1C1D;
+      border-color: rgba(255, 255, 255, 0.25);
+      border-bottom: 1px solid #1A1C1D; }
+  .app_tab.edit .btn-tab {
+    opacity: 0;
+    padding-left: 3.5em; }
+
+.btn-tab {
+  background-color: transparent;
+  padding: .5em 1.5em;
+  text-transform: uppercase;
+  color: #fff;
+  position: relative; }
   .btn-tab span {
     position: relative; }
   .btn-tab:hover:before {
     background: #1A1C1D; }
-  .active .btn-tab:before {
-    background: #1A1C1D;
-    border-color: rgba(255, 255, 255, 0.25);
-    border-bottom: 1px solid #1A1C1D; }
+
+.tab_edit-box {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center; }
+  .tab_edit-box input {
+    margin: 0;
+    width: calc(100% - 5em);
+    padding: .5em 0;
+    margin-left: 1.5em;
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.08); }
+  .tab_edit-box .btn--edit:hover {
+    color: red; }
 
 /*---------TAB Content---------*/
 .app_component-box {
@@ -837,24 +867,19 @@ ul:not([id]):not([class]) {
   margin: 0;
   list-style-type: none;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -webkit-box-align: baseline;
-  -webkit-align-items: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
-  -webkit-align-content: flex-start;
-      -ms-flex-line-pack: start;
-          align-content: flex-start; }
+  -ms-flex-line-pack: start;
+      align-content: flex-start; }
 
 .app_component {
   display: inline-block;
@@ -867,14 +892,12 @@ ul:not([id]):not([class]) {
 /*---------RESULT---------*/
 .app_result {
   -webkit-box-flex: 1;
-  -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: hidden; }
   @media (min-width: 1024px) {
     .app_result {
       display: -webkit-box;
-      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex; } }
   .app_result .hljs {
@@ -886,17 +909,14 @@ ul:not([id]):not([class]) {
   @media (min-width: 1024px) {
     .result-item {
       -webkit-box-flex: 1;
-      -webkit-flex: 1 1 33.33%;
           -ms-flex: 1 1 33.33%;
               flex: 1 1 33.33%;
       max-width: 33.33%;
       display: -webkit-box;
-      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
-      -webkit-flex-direction: column;
           -ms-flex-direction: column;
               flex-direction: column; } }
   .result-item .heading {
@@ -908,7 +928,6 @@ ul:not([id]):not([class]) {
       margin-bottom: 0; }
   .result-item textarea {
     -webkit-box-flex: 1;
-    -webkit-flex: 1 1 auto;
         -ms-flex: 1 1 auto;
             flex: 1 1 auto;
     margin-bottom: 0; }
@@ -917,7 +936,6 @@ ul:not([id]):not([class]) {
 
 .result-box {
   -webkit-box-flex: 1;
-  -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: auto;
@@ -925,6 +943,7 @@ ul:not([id]):not([class]) {
 
 /*---------POPUP---------*/
 .popup {
+  display: none;
   position: fixed;
   left: 0;
   top: 0;
@@ -932,62 +951,58 @@ ul:not([id]):not([class]) {
   right: 0;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 100; }
+  .ready-app .popup {
+    display: block; }
 
 .popup_box {
   position: absolute;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
-      -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   width: 95vw;
   height: 95vh;
   padding: 30px;
   background-color: #1A1C1D; }
+  .popup_delete-tab .popup_box {
+    width: auto;
+    height: auto; }
 
 .popup_foot {
   padding-top: 1em;
   display: -webkit-box;
-  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between; }
 
 .app_footer {
   padding: 10px 30px;
   font-size: .875rem;
-  background: -webkit-linear-gradient(0deg, #5b5b5b, #545454);
+  background: -webkit-gradient(linear, left top, right top, from(#5b5b5b), to(#545454));
   background: linear-gradient(90deg, #5b5b5b, #545454);
   border-top: 1px solid #7d7d7d;
   color: #fff; }
   @media (min-width: 768px) {
     .app_footer {
       display: -webkit-box;
-      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
-      -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
       -webkit-box-pack: justify;
-      -webkit-justify-content: space-between;
           -ms-flex-pack: justify;
               justify-content: space-between; } }
 
@@ -1434,7 +1449,7 @@ hue-6-2: #c18401
 
 Colorbrewer theme
 Original: https://github.com/mbostock/colorbrewer-theme (c) Mike Bostock <mike@ocks.org>
-Ported by Fabr├нcio Tavares de Oliveira
+Ported by Fabrício Tavares de Oliveira
 
 */
 .color-brewer .hljs {

@@ -18,19 +18,20 @@
 				<ul class="app_tab-list">
 					<li class="app_tab" 
 						v-for="(tab, index) in menu"
-						v-bind:class="{active: tabSelect == 'tab'+index}">
+						v-bind:class="{active: tabSelect == 'tab'+index, edit: tabEdit == 'tabEdit'+index}">
 						<button class="btn-tab" type="button" 
 								v-on:click="tabSelect = 'tab'+index"
-								v-on:dblclick = "tabEdit = 'tabEdit'+index">
+								v-on:dblclick = "editTab(index)">
 							<span>{{ tab.tabName }}</span>
 						</button>
-						<div v-if="tabEdit == 'tabEdit'+index">
+						<div class="tab_edit-box" v-if="tabEdit == 'tabEdit'+index">
 							<input type="text"  
 									v-model="tab.tabName"
 									v-on:blur="cancelTab"
-									v-on:change="saveTab">
+									v-on:change="saveTab"
+									ref="inputFocus">
 							<button class="btn--edit icon-trash-o" type="button" 
-									v-on:click="popupDeleteTab = true;"></button>
+									v-on:click="openDeletePopup(index);"></button>
 						</div>
 					</li>
 					<li class="app_tab">
@@ -70,9 +71,10 @@
 							<pre 
 								v-highlightjs="box.boxHtml" 
 								v-for="box in tab.tabBox" 
-								v-if="box.boxShow" 
-								contenteditable 
-								spellcheck="false">&lt;!-- {{box.boxName}} --&gt;
+								v-if="box.boxShow"
+								v-on:keyup.tab="pressTabButton"
+								spellcheck="false"
+								contenteditable>&lt;!-- {{box.boxName}} --&gt;
 								<code></code>
 							</pre>
 						</div>
@@ -146,8 +148,7 @@
 			</div>
 		</footer>
 		<section class="popup popup_new-template" 
-				v-if="popupShow" 
-				v-show="popupShow">
+				v-if="popupShow">
 			<div class="popup_box">
 				<header class="popup_head">
 					<h1>Create new template</h1>
@@ -274,70 +275,91 @@
 	});
 
 	var app = new Vue({
-	  el: '#app',
-	  data: {
-		tabSelect: 'tab0',
-		tabEdit: '',
-		popupDeleteTab: false,
-		popupShow: false,
-		popupEditShow: false,
-		styleSelect: 'atom-one-dark',
-		editMode: false,
-		menu: []
-	  },
-	  methods: {
-		addTab: function (){
-			var tab = {
-				tabName:'New tab',
-				tabBox: []
+		el: '#app',
+			data: {
+			tabSelect: 'tab0',
+			tabEdit: '',
+			tabDelVar: '',
+			popupDeleteTab: false,
+			popupShow: false,
+			popupEditShow: false,
+			styleSelect: 'atom-one-dark',
+			editMode: false,
+			menu: []
+		},
+		methods: {
+			addTab: function (){
+				var tab = {
+					tabName:'New tab',
+					tabBox: []
+				}
+				this.menu.push(tab)
+			},
+			editTab: function (n){
+				var self = this;
+				this.tabEdit = 'tabEdit'+ n;
+				setTimeout(function (){
+					self.$refs.inputFocus[0].focus();
+				}, 100);
+			},
+			cancelTab: function (){
+				var self = this;
+				setTimeout(function (){
+					self.tabEdit = '';
+				}, 200);
+			},
+			saveTab: function (){
+				this.writeBase();
+				this.cancelTab;
+			},
+			openDeletePopup: function (n){
+				var self = this;
+				this.tabDelVar = n;
+				this.popupDeleteTab = true;
+			},	
+			deleteTab: function (){
+				var n = this.tabDelVar;
+				this.menu.splice(n, 1);
+				this.writeBase();
+				this.popupDeleteTab = false;
+			},
+			cancelPopup: function (){
+				this.popupShow = false;
+			},
+			openPopup: function (tab){
+				this.popupShow = true;
+				this.tabInEdit = tab;
+				this.popupModel = {
+					boxName: '',
+					boxShow: false,
+					boxHtml: '',
+					boxCss: '',
+					boxJs: ''
+				}
+			},
+			saveBox: function() {
+				this.tabInEdit.push(this.popupModel);
+				//dataRef.push(self.menu);
+				this.writeBase();
+				this.cancelPopup();
+			},
+			loadBase: function() {
+				var self = this;
+				dataRef.once('value').then(function(s){
+					self.menu = s.val();
+				})
+			},
+			writeBase: function() {
+				var self = this;
+				dataRef.set(self.menu);
+			},
+			pressTabButton: function() {
+
 			}
-			this.menu.push(tab)
 		},
-		cancelTab: function (){
-			this.tabEdit = '';
-		},
-		saveTab: function (){
-			alert("save");
-			// this.writeBase();
-			// this.cancelTab;
-		},
-		deleteTab: function (n){
-			//this.menu.splice(n, 1);
-			// this.writeBase();
-			this.tabEdit = '';
-			this.popupDeleteTab = false;
-		},
-		cancelPopup: function (){
-			this.popupShow = false;
-		},
-		openPopup: function (tab){
-			this.popupShow = true;
-			this.tabInEdit = tab;
-			this.popupModel = {
-				boxName: '',
-				boxShow: false,
-				boxHtml: '',
-				boxCss: '',
-				boxJs: ''
-			}
-		},
-		saveBox: function() {
-			this.tabInEdit.push(this.popupModel);
-			//dataRef.push(self.menu);
-			this.writeBase();
-			this.cancelPopup();
-		},
-		loadBase: function() {
-			var self = this;
-			dataRef.once('value').then(function(s){
-				self.menu = s.val();
-			})
-		},
-		writeBase: function() {
-			var self = this;
-			dataRef.set(self.menu);
+		mounted: function () {
+			document.body.className = "ready-app";
 		}
-	  }
 	});
 	app.loadBase();
 
@@ -345,6 +367,3 @@
 	
 </body>
 </html>
-
-1. как передать индекс в попап чтобы удалить?
-2. как поставить автофокус на input при удалении + фокус для гарячих клавиш?
