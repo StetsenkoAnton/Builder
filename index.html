@@ -44,15 +44,16 @@
 					<ul class="app_tab-content" 
 						v-for="(tab, index) in menu" 
 						v-if="tabSelect == 'tab'+index">
-						<li class="app_component" v-for="box in tab.tabBox">
+						<li class="app_component" v-for="(box, index) in tab.tabBox">
 							<label>
 								<input type="checkbox" class="checkbox" v-model="box.boxShow">
 								{{ box.boxName }}
 							</label>
 							<button class="btn--edit" type="button"
 									v-if="editMode"
-									v-on:click="popupEditShow = true"	
-								><span class="icon-edit"></span></button>
+									v-on:click="openEditPopupTemplate(box, tab.tabBox, index)" >
+								<span class="icon-edit"></span>
+							</button>
 						</li>
 						<li>
 							<button type="button" class="btn--edit" v-on:click="openPopup(tab.tabBox)">
@@ -148,7 +149,7 @@
 					<option value="monokai-sublime">monokai-sublime</option>
 				</select>
 			</div>
-			<div class="icon-plus2"></div>
+<!-- 			<div class="icon-plus2"></div>
 <div class="icon-check"></div>
 <div class="icon-close"></div>
 <div class="icon-cog2"></div>
@@ -178,7 +179,7 @@
 <div class="icon-cloud-check"></div>
 <div class="icon-facebook"></div>
 <div class="icon-github"></div>
-<div class="icon-linkedin2"></div>
+<div class="icon-linkedin2"></div> -->
 		</footer>
 		<section class="popup popup_new-template" 
 				v-if="popupShow">
@@ -221,33 +222,33 @@
 				<header class="popup_head">
 					<h1>Edit template</h1>
 					<label>
-						<input type="text" placeholder="Template name">
+						<input type="text" placeholder="Template name" v-model="templateEditVar.box.boxName">
 					</label>
-					<button class="btn">Delete template</button>
+					<button class="btn" v-on:click="deleteTemplate">Delete template</button>
 				</header>
 				<div class="app_result">
 				  <div class="result-item html-result">
 					<div class="heading">
 					  <h4>HTML</h4> 
 					</div>
-					<textarea placeholder="HTML"></textarea>
+					<textarea placeholder="HTML" v-model="templateEditVar.box.boxHtml"></textarea>
 				  </div>
 				  <div class="result-item css-result">
 					<div class="heading">
 					  <h4>SCSS</h4>
 					</div>
-					<textarea placeholder="CSS"></textarea>
+					<textarea placeholder="CSS" v-model="templateEditVar.box.boxCss"></textarea>
 				  </div>
 				  <div class="result-item js-result">
 					<div class="heading">
 					  <h4>JS</h4>
 					</div>
-					<textarea placeholder="JS"></textarea>
+					<textarea placeholder="JS" v-model="templateEditVar.box.boxJs"></textarea>
 				  </div>
 				</div>
 				<footer class="popup_foot">
 					<button class="btn btn--alert" v-on:click="popupEditShow = false;">Cancel</button>
-					<button class="btn" v-on:click="saveBox">Save</button>
+					<button class="btn" v-on:click="saveEditTemplate">Save</button>
 				</footer>
 			</div>
 		</section>
@@ -313,6 +314,7 @@
 			tabSelect: 'tab0',
 			tabEdit: '',
 			tabDelVar: '',
+			templateEditVar: {}, 
 			popupDeleteTab: false,
 			popupShow: false,
 			popupEditShow: false,
@@ -376,6 +378,24 @@
 				this.writeBase();
 				this.cancelPopup();
 			},
+			openEditPopupTemplate: function(box, boxParent, index) {
+				this.popupEditShow = true;
+				this.templateEditVar = {
+					box: Object.assign({}, box),
+					boxParent: boxParent,
+					boxIndex: index
+				};
+			},
+			saveEditTemplate: function() {
+				this.templateEditVar.boxParent.splice(this.templateEditVar.boxIndex, 1, this.templateEditVar.box);
+				this.writeBase();
+				this.popupEditShow = false;
+			},
+			deleteTemplate: function() {
+				this.templateEditVar.boxParent.splice(this.templateEditVar.boxIndex, 1);
+				this.writeBase();
+				this.popupEditShow = false;
+			},
 			loadBase: function() {
 				var self = this;
 				dataRef.once('value').then(function(s){
@@ -385,9 +405,6 @@
 			writeBase: function() {
 				var self = this;
 				dataRef.set(self.menu);
-			},
-			pressTabButton: function() {
-
 			}
 		},
 		mounted: function () {
