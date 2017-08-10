@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Template constructor</title>
+	<link media="all" rel="stylesheet" href="scss/style.css">
+	
+</head>
+<body>
+	<div id="app" v-bind:class="styleSelect">
+	<!-- <div>
+		<button class="btn" type="button" v-on:click="loadBase()">+</button>
+	</div> -->
+		<!-- <pre>{{ menu[0] }}</pre> -->
+		<main class="app_main">
+			<section class="app_settings">
+			<p>User name {{ userName }}</p>
+				<ul class="app_tab-list">
+					<li class="app_tab" 
+						v-for="(tab, index) in menu"
+						v-bind:class="{active: tabSelect == 'tab'+index, edit: tabEdit == 'tabEdit'+index}">
+						<button class="btn-tab" type="button" 
+								v-on:click="tabSelect = 'tab'+index"
+								v-on:dblclick = "editTab(index)">
+							<span>{{ tab.tabName }}</span>
+						</button>
+						<div class="tab_edit-box" v-if="tabEdit == 'tabEdit'+index">
+							<input type="text"  
+									v-model="tab.tabName"
+									v-on:blur="cancelTab"
+									v-on:change="saveTab"
+									ref="inputFocus">
+							<button class="btn--edit icon-trash-o" type="button" 
+									v-on:click="openDeletePopup(index);"></button>
+						</div>
+					</li>
+					<li class="app_tab">
+						<button class="btn-tab" type="button" v-on:click="addTab">
+							<span class="icon-folder-plus"></span>
+						</button>
+					</li>
+				</ul>
+				<div class="app_component-box">
+					<ul class="app_tab-content" 
+						v-for="(tab, index) in menu" 
+						v-if="tabSelect == 'tab'+index">
+						<li class="app_component" v-for="(box, index) in tab.tabBox">
+							<label>
+								<input type="checkbox" class="checkbox" v-model="box.boxShow">
+								{{ box.boxName }}
+							</label>
+							<button class="btn--edit" type="button"
+									v-if="editMode"
+									v-on:click="openEditPopupTemplate(box, tab.tabBox, index)" >
+								<span class="icon-edit"></span>
+							</button>
+						</li>
+						<li>
+							<button type="button" class="btn--edit" v-on:click="openPopup(tab.tabBox)">
+								<span class="icon-plus2"></span>&nbsp;<span>New</span>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</section>
+		
+			<section class="app_result">
+				<div class="result-item html-result">
+				 	<div class="heading">
+						<h4>HTML</h4> 
+					</div>
+					<div class="result-box hljs">
+						<div v-for="tab in menu">
+							<pre 
+								v-highlightjs="box.boxHtml" 
+								v-for="box in tab.tabBox" 
+								v-if="box.boxShow"
+								v-on:keyup.tab="pressTabButton"
+								spellcheck="false"
+								contenteditable>&lt;!-- {{box.boxName}} --&gt;
+								<code></code>
+							</pre>
+						</div>
+					</div>
+				</div>
+				<div class="result-item css-result">
+					<div class="heading">
+						<h4>CSS</h4>
+					</div>
+					<div class="result-box hljs">
+						<div v-for="tab in menu">
+							<pre 
+								v-highlightjs="box.boxCss" 
+								v-for="box in tab.tabBox" 
+								v-if="box.boxShow" 
+								contenteditable 
+								spellcheck="false">/*-- {{box.boxName}} --*/
+								<code></code>
+							</pre>
+						</div>
+					</div>
+				</div>
+				<div class="result-item js-result">
+					<div class="heading">
+						<h4>JS</h4>
+					</div>
+					<div class="result-box hljs">
+						<div v-for="tab in menu">
+							<pre 
+								v-highlightjs="box.boxJs" 
+								v-for="box in tab.tabBox" 
+								v-if="box.boxShow" 
+								contenteditable 
+								spellcheck="false">//-- {{box.boxName}} --
+								<code></code>
+							</pre>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="app_footer">
+			<a href="https://github.com/StetsenkoAnton/Builder/issues">
+				<span class="icon-bug2"></span>
+				<span>Add issue</span>
+			</a>
+			<div>
+				<label>
+					<span>Edit mode</span>
+					<input type="checkbox" v-model="editMode">
+				</label>
+				
+				<span>Change style code</span>
+				<select v-model="styleSelect">
+					<option value="agate">agate</option>
+					<option value="androidstudio">androidstudio</option>
+					<option value="atelier-savanna-dark">atelier-savanna-dark</option>
+					<option value="atelier-savanna-light">atelier-savanna-light</option>
+					<option value="atom-one-dark">atom-one-dark</option>
+					<option value="atom-one-light">atom-one-light</option>
+					<option value="codepen-embed">codepen-embed</option>
+					<option value="color-brewer">color-brewer</option>
+					<option value="darcula">darcula</option>
+					<option value="darkula">darkula</option>
+					<option value="foundation">foundation</option>
+					<option value="github">github</option>
+					<option value="github-gist">github-gist</option>
+					<option value="googlecode">googlecode</option>
+					<option value="monokai-sublime">monokai-sublime</option>
+				</select>
+			</div>
+<!-- 			<div class="icon-plus2"></div>
+<div class="icon-check"></div>
+<div class="icon-close"></div>
+<div class="icon-cog2"></div>
+<div class="icon-trash-o"></div>
+<div class="icon-pencil"></div>
+<div class="icon-edit"></div>
+<div class="icon-pencil-square-o"></div>
+<div class="icon-expand"></div>
+<div class="icon-compress"></div>
+<div class="icon-exclamation-triangle"></div>
+<div class="icon-warning"></div>
+<div class="icon-bug2"></div>
+<div class="icon-language"></div>
+<div class="icon-file-code-o"></div>
+<div class="icon-pencil2"></div>
+<div class="icon-folder"></div>
+<div class="icon-folder-open"></div>
+<div class="icon-folder-plus"></div>
+<div class="icon-folder-minus"></div>
+<div class="icon-database"></div>
+<div class="icon-spinner6"></div>
+<div class="icon-equalizer"></div>
+<div class="icon-cog"></div>
+<div class="icon-cloud"></div>
+<div class="icon-cloud-download"></div>
+<div class="icon-cloud-upload"></div>
+<div class="icon-cloud-check"></div>
+<div class="icon-facebook"></div>
+<div class="icon-github"></div>
+<div class="icon-linkedin2"></div> -->
+		</footer>
+		<section class="popup popup_new-template" 
+				v-if="popupShow">
+			<div class="popup_box">
+				<header class="popup_head">
+					<h1>Create new template</h1>
+					<label>
+						<input type="text" placeholder="Template name" v-model="popupModel.boxName">
+					</label>
+				</header>
+				<div class="app_result">
+				  <div class="result-item html-result">
+					<div class="heading">
+					  <h4>HTML</h4> 
+					</div>
+					<textarea placeholder="HTML" v-model="popupModel.boxHtml"></textarea>
+				  </div>
+				  <div class="result-item css-result">
+					<div class="heading">
+					  <h4>SCSS</h4>
+					</div>
+					<textarea placeholder="CSS" v-model="popupModel.boxCss"></textarea>
+				  </div>
+				  <div class="result-item js-result">
+					<div class="heading">
+					  <h4>JS</h4>
+					</div>
+					<textarea placeholder="JS" v-model="popupModel.boxJs"></textarea>
+				  </div>
+				</div>
+				<footer class="popup_foot">
+					<button class="btn btn--alert" title="delete new template" v-on:click="cancelPopup">Cancel</button>
+					<button class="btn" v-on:click="saveBox">Save</button>
+				</footer>
+			</div>
+		</section>
+		<section class="popup popup_new-template" 
+				v-if="popupEditShow">
+			<div class="popup_box">
+				<header class="popup_head">
+					<h1>Edit template</h1>
+					<label>
+						<input type="text" placeholder="Template name" v-model="templateEditVar.box.boxName">
+					</label>
+					<button class="btn" v-on:click="deleteTemplate">Delete template</button>
+				</header>
+				<div class="app_result">
+				  <div class="result-item html-result">
+					<div class="heading">
+					  <h4>HTML</h4> 
+					</div>
+					<textarea placeholder="HTML" v-model="templateEditVar.box.boxHtml"></textarea>
+				  </div>
+				  <div class="result-item css-result">
+					<div class="heading">
+					  <h4>SCSS</h4>
+					</div>
+					<textarea placeholder="CSS" v-model="templateEditVar.box.boxCss"></textarea>
+				  </div>
+				  <div class="result-item js-result">
+					<div class="heading">
+					  <h4>JS</h4>
+					</div>
+					<textarea placeholder="JS" v-model="templateEditVar.box.boxJs"></textarea>
+				  </div>
+				</div>
+				<footer class="popup_foot">
+					<button class="btn btn--alert" v-on:click="popupEditShow = false;">Cancel</button>
+					<button class="btn" v-on:click="saveEditTemplate">Save</button>
+				</footer>
+			</div>
+		</section>
+		<section class="popup popup_delete-tab" 
+				v-if="popupDeleteTab">
+				<div class="popup_box">
+					<h2>Удалить вкладку и все ее содержимое?</h2>
+					<footer class="popup_foot">
+						<button class="btn " title="delete new template" v-on:click="popupDeleteTab = false;">Cancel</button>
+						<button class="btn btn--alert" v-on:click="deleteTab">Удалить</button>
+					</footer>
+				</div>
+		</section>
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/vuefirebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+	<script src="js/highlight.pack.js"></script> 
+	<script>
+    // Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyC-di1Xzu86XyDIAuzCanfOk2j6n4bCd_Q",
+		authDomain: "fitter-template.firebaseapp.com",
+		databaseURL: "https://fitter-template.firebaseio.com",
+		projectId: "fitter-template",
+		storageBucket: "fitter-template.appspot.com",
+		messagingSenderId: "626900079578"
+	};
+  	firebase.initializeApp(config);
+
+	var dataRef = firebase.database().ref('templates');
+
+	 // Следим за UID (уникальный номер) пользователя
+    var currentUid = null;
+    firebase.auth().onAuthStateChanged(function(user) {
+        // Слушатель onAuthStateChanged срабатывает каждый раз когда токен пользователя меняется
+        // Это может случиться когда уже новый пользователь логинится, например.
+        // Или это также может случиться когда токен пользователя истек
+        if (user && user.uid != currentUid) {
+            // Обноваляем UI когда новый пользователь логинится
+            // В другом случае игнорируем если это обновление токена
+            // Обновляем UID текущего пользователя
+            currentUid = uid;
+        } else {
+            // Операция выхода из приложения. Переустанавливает UID текущего пользователя
+            currentUid = null;
+        }
+    });
+
+	 // Initialize Highlight
+	Vue.directive('highlightjs', {
+	  deep: true,
+	  bind: function(el, binding) {
+		// on first bind, highlight all targets
+		let targets = el.querySelectorAll('code')
+		targets.forEach((target) => {
+		  // if a value is directly assigned to the directive, use this
+		  // instead of the element content.
+		  if (binding.value) {
+			target.textContent = binding.value
+		  }
+		  hljs.highlightBlock(target)
+		})
+	  },
+	  componentUpdated: function(el, binding) {
+		// after an update, re-fill the content and then highlight
+		let targets = el.querySelectorAll('code')
+		targets.forEach((target) => {
+		  if (binding.value) {
+			target.textContent = binding.value
+			hljs.highlightBlock(target)
+		  }
+		})
+	  }
+	});
+
+	var app = new Vue({
+		el: '#app',
+			data: {
+			tabSelect: 'tab0',
+			tabEdit: '',
+			tabDelVar: '',
+			templateEditVar: {}, 
+			popupDeleteTab: false,
+			popupShow: false,
+			popupEditShow: false,
+			styleSelect: 'atom-one-dark',
+			editMode: false,
+			userName: '',
+			menu: []
+		},
+		methods: {
+			addTab: function (){
+				var tab = {
+					tabName:'New tab',
+					tabBox: []
+				}
+				this.menu.push(tab)
+			},
+			editTab: function (n){
+				var self = this;
+				this.tabEdit = 'tabEdit'+ n;
+				setTimeout(function (){
+					self.$refs.inputFocus[0].focus();
+				}, 100);
+			},
+			cancelTab: function (){
+				var self = this;
+				setTimeout(function (){
+					self.tabEdit = '';
+				}, 200);
+			},
+			saveTab: function (){
+				this.writeBase();
+				this.cancelTab;
+			},
+			openDeletePopup: function (n){
+				var self = this;
+				this.tabDelVar = n;
+				this.popupDeleteTab = true;
+			},	
+			deleteTab: function (){
+				var n = this.tabDelVar;
+				this.menu.splice(n, 1);
+				this.writeBase();
+				this.popupDeleteTab = false;
+			},
+			cancelPopup: function (){
+				this.popupShow = false;
+			},
+			openPopup: function (tab){
+				this.popupShow = true;
+				this.tabInEdit = tab;
+				this.popupModel = {
+					boxName: '',
+					boxShow: false,
+					boxHtml: '',
+					boxCss: '',
+					boxJs: ''
+				}
+			},
+			saveBox: function() {
+				this.tabInEdit.push(this.popupModel);
+				//dataRef.push(self.menu);
+				this.writeBase();
+				this.cancelPopup();
+			},
+			openEditPopupTemplate: function(box, boxParent, index) {
+				this.popupEditShow = true;
+				this.templateEditVar = {
+					box: Object.assign({}, box),
+					boxParent: boxParent,
+					boxIndex: index
+				};
+			},
+			saveEditTemplate: function() {
+				this.templateEditVar.boxParent.splice(this.templateEditVar.boxIndex, 1, this.templateEditVar.box);
+				this.writeBase();
+				this.popupEditShow = false;
+			},
+			deleteTemplate: function() {
+				this.templateEditVar.boxParent.splice(this.templateEditVar.boxIndex, 1);
+				this.writeBase();
+				this.popupEditShow = false;
+			},
+			loadBase: function() {
+				var self = this;
+				dataRef.once('value').then(function(s){
+					self.menu = s.val();
+				})
+			},
+			writeBase: function() {
+				var self = this;
+				dataRef.set(self.menu);
+			}
+		},
+		mounted: function () {
+			document.body.className = "ready-app";
+			this.userName = currentUid;
+		}
+	});
+	app.loadBase();
+
+	</script>
+	
+</body>
+</html>
