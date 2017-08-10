@@ -415,7 +415,6 @@
 		}
 	});
 	app.loadBase();
-	app.userName = currentUid;
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 		// Пользователь залогинен. Берем данные
@@ -426,6 +425,7 @@
 			var isAnonymous = user.isAnonymous;
 			var uid = user.uid;
 			var providerData = user.providerData;
+
 			console.log(displayName);
 			app.userName = displayName;
 			console.log(email);
@@ -435,8 +435,7 @@
 			console.log(uid);
 			console.log(providerData);
 		} else {
-		// Пользователь разлогинен
-		// ...
+			console.log("НЕ залогинен");
 		}
 	});
 	</script>
