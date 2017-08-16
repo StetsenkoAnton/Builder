@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>FirebaseAuthForWeb</title>
+    <title>Template constructor</title>
     <meta charset="UTF-8">
 </head>
 <!-- ИНИЦИАЛИЗАЦИЯ FIREBASE НАЧАЛО. ВСТАВЬТЕ СВОЙ КОД ИЗ КОНСОЛИ FIREBASE СЮДА-->
-<script src="https://www.gstatic.com/firebasejs/4.0.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
 <script>
     // Initialize Firebase
     var config = {
@@ -19,7 +19,7 @@
     };
     firebase.initializeApp(config);
 </script>
-<!-- ИНИЦИАЛИЗАЦИЯ FIREBASE КОНЕЦ.-->
+<
 
 <!--Код ниже инициализирует виджет для логина с помощью FirebaseUI  -->
 <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
@@ -40,10 +40,9 @@
     // Для начала методы мы подождем пока html полностью загрузиться
     ui.start('#firebaseui-auth-container', uiConfig);
 </script>
-<!-- Здесь можно поставить фоновую картинку и сообщение  -->
-<div></div>
+
 <body>
-<h1 align="center">Firebase Аутентификация для Web</h1>
-<div id="firebaseui-auth-container"></div>
+    <h1 align="center">Firebase Аутентификация для Web</h1>
+    <div id="firebaseui-auth-container"></div>
 </body>
 </html>

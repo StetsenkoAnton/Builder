@@ -9,37 +9,39 @@
 </head>
 <body>
 	<div id="app" v-bind:class="styleSelect">
-	<!-- <div>
-		<button class="btn" type="button" v-on:click="loadBase()">+</button>
-	</div> -->
-		<!-- <pre>{{ menu[0] }}</pre> -->
+		<header class="app_header">
+			Sandbox
+			<button class="btn" type="button" v-on:click="signOut()">Return to registration</button>
+		</header>
 		<main class="app_main">
 			<section class="app_settings">
-				<ul class="app_tab-list">
-					<li class="app_tab" 
-						v-for="(tab, index) in menu"
-						v-bind:class="{active: tabSelect == 'tab'+index, edit: tabEdit == 'tabEdit'+index}">
-						<button class="btn-tab" type="button" 
-								v-on:click="tabSelect = 'tab'+index"
-								v-on:dblclick = "editTab(index)">
-							<span>{{ tab.tabName }}</span>
-						</button>
-						<div class="tab_edit-box" v-if="tabEdit == 'tabEdit'+index">
-							<input type="text"  
-									v-model="tab.tabName"
-									v-on:blur="cancelTab"
-									v-on:change="saveTab"
-									ref="inputFocus">
-							<button class="btn--edit icon-trash-o" type="button" 
-									v-on:click="openDeletePopup(index);"></button>
-						</div>
-					</li>
-					<li class="app_tab">
+				<div class="app_tab-wrap">
+					<ul class="app_tab-list">
+						<li class="app_tab" 
+							v-for="(tab, index) in menu"
+							v-bind:class="{active: tabSelect == 'tab'+index, edit: tabEdit == 'tabEdit'+index}">
+							<button class="btn-tab" type="button" 
+									v-on:click="tabSelect = 'tab'+index"
+									v-on:dblclick = "editTab(index)">
+								<span>{{ tab.tabName }}</span>
+							</button>
+							<div class="tab_edit-box" v-if="tabEdit == 'tabEdit'+index">
+								<input type="text"  
+										v-model="tab.tabName"
+										v-on:blur="cancelTab"
+										v-on:change="saveTab"
+										ref="inputFocus">
+								<button class="btn--add icon-trash-o" type="button" 
+										v-on:click="openDeletePopup(index);"></button>
+							</div>
+						</li>
+					</ul>
+					<div class="app_tab add-tab">
 						<button class="btn-tab" type="button" v-on:click="addTab">
 							<span class="icon-folder-plus"></span>
 						</button>
-					</li>
-				</ul>
+					</div>
+				</div>
 				<div class="app_component-box">
 					<ul class="app_tab-content" 
 						v-for="(tab, index) in menu" 
@@ -47,7 +49,7 @@
 						<li class="app_component" v-for="(box, index) in tab.tabBox">
 							<label>
 								<input type="checkbox" class="checkbox" v-model="box.boxShow">
-								{{ box.boxName }}
+								<span>{{ box.boxName }}</span>
 							</label>
 							<button class="btn--edit" type="button"
 									v-if="editMode"
@@ -56,7 +58,7 @@
 							</button>
 						</li>
 						<li>
-							<button type="button" class="btn--edit" v-on:click="openPopup(tab.tabBox)">
+							<button type="button" class="btn--add" v-on:click="openPopup(tab.tabBox)">
 								<span class="icon-plus2"></span>&nbsp;<span>New</span>
 							</button>
 						</li>
@@ -263,6 +265,9 @@
 				</div>
 		</section>
 	</div>
+	<div class="spinner-wrap">
+		<i class="spinner icon-spinner6"></i>
+	</div>
 	<script src="js/vue.js"></script>
 	<script src="js/vuefirebase.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
@@ -281,7 +286,7 @@
 
 	var dataRef = firebase.database().ref('templates');
 
-	 // Initialize Highlight
+	// Initialize Highlight
 	Vue.directive('highlightjs', {
 	  deep: true,
 	  bind: function(el, binding) {
@@ -400,18 +405,29 @@
 				var self = this;
 				dataRef.once('value').then(function(s){
 					self.menu = s.val();
-				})
+				});
 			},
 			writeBase: function() {
 				var self = this;
 				dataRef.set(self.menu);
+			},
+			signOut: function() {
+				firebase.auth().signOut().then(function() {
+					// Логаут прошел успешно
+					document.location.href = "https://stetsenkoanton.github.io/log.html";
+				}).catch(function(error) {
+					// Ошибка
+					console.log('ошибка выхода')
+				});
 			}
 		},
 		mounted: function () {
-			document.body.className = "ready-app";
+			this.loadBase();
+			setTimeout(function() 
+				{ document.body.className = "app-ready" }, 2000);
 		}
 	});
-	app.loadBase();
+	
 
 	</script>
 	

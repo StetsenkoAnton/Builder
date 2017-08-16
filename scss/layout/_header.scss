@@ -1,0 +1,8 @@
+.app_header {
+	padding: 10px $global-padding;
+	@include media('>=tablet') {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+}

@@ -16,10 +16,29 @@
 
 
 }
-.app_tab-list {
+
+.app_tab-wrap {
+	display: flex;
+	position: relative;
 	padding: 0 $global-padding;
+	&:after {
+		content: '';
+		position: absolute;
+		right: 0;
+		bottom: -1px;
+		top: 0;
+		width: 150px;
+		background: linear-gradient(to left, #343436 70px, rgba(#343436, 0) 100%);
+	}
+}
+
+.app_tab-list {
+	padding: 0 5px;
 	margin: 0 0 -1px;
 	list-style-type: none;
+	overflow-x: auto;
+	white-space: nowrap;
+	flex: 0 1 auto;
 }
 .app_tab {
 	display: inline-block;
@@ -56,6 +75,11 @@
 			opacity: 0;
 			padding-left: 3.5em;
 		}
+	}
+	&.add-tab {
+		position: relative;
+		z-index: 1;
+		flex: 0 0 auto;
 	}
 }
 
@@ -113,11 +137,19 @@
 }
 .app_component {
 	display: inline-block;
-	width: 10%;
+	width: 14%;
 	padding: 0 10px 10px 0;
+	margin-right: 35px;
 	white-space: nowrap;
 	label {
 		cursor: pointer;
+	}
+	span {
+		text-overflow: ellipsis;
+		display: inline-block;
+		width: 100%;
+		overflow: hidden;
+		vertical-align: middle;
 	}
 }
 
