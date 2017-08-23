@@ -217,7 +217,7 @@
 				</div>
 				<footer class="popup_foot">
 					<button class="btn btn--alert" title="delete new template" v-on:click="cancelPopup">Cancel</button>
-					<button class="btn" v-on:click="saveBox">Save</button>
+					<button class="btn" v-on:click="saveBox" v-if="popupModel.boxName">Save</button>
 				</footer>
 			</div>
 		</section>
@@ -287,7 +287,18 @@
 	};
   	firebase.initializeApp(config);
 
-	var dataRef = firebase.database().ref('templates');
+  	var userID;
+  	firebase.auth().onAuthStateChanged(function(user) {
+		// if (user) {
+			userID = user.uid;
+			console.log("user ID to func: " + userID);
+		// } else {
+		// 	//document.location.href = "https://stetsenkoanton.github.io/log.html";
+		// }
+	});
+	console.log("userID after " + userID)
+
+	var dataRef = firebase.database().ref('users');
 
 	 // Initialize Highlight
 	Vue.directive('highlightjs', {
@@ -322,13 +333,14 @@
 			tabSelect: 'tab0',
 			tabEdit: '',
 			tabDelVar: '',
-			templateEditVar: {}, 
+			templateEditVar: {},
+			popupModel: {},
 			popupDeleteTab: false,
 			popupShow: false,
 			popupEditShow: false,
 			styleSelect: 'atom-one-dark',
 			editMode: false,
-			userName: '',
+			userName: userID,
 			menu: []
 		},
 		methods: {
@@ -407,6 +419,7 @@
 			},
 			loadBase: function() {
 				var self = this;
+
 				dataRef.once('value').then(function(s){
 					self.menu = s.val();
 				})
@@ -426,15 +439,15 @@
 			}
 		},
 		mounted: function () {
-			this.loadBase();
+			// this.loadBase();
 			setTimeout(function() 
 				{ document.body.className = "app-ready" }, 2000);
 			
 		}
 	});
-
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
+
 		// Пользователь залогинен. Берем данные
 			var displayName = user.displayName;
 			var email = user.email;
@@ -445,18 +458,25 @@
 			var providerData = user.providerData;
 
 			console.log(displayName);
-			app.userName = displayName;
-			console.log(app.userName);
-			console.log(email);
-			console.log(emailVerified);
-			console.log(photoURL);
-			console.log(isAnonymous);
-			console.log(uid);
-			console.log(providerData);
+			//app.userName = displayName;
+			// console.log(app.userName);
+			// console.log(email);
+			// console.log(emailVerified);
+			// console.log(photoURL);
+			// console.log(isAnonymous);
+			// console.log(uid);
+			// console.log(providerData);
+			
+			console.log(dataRef);
+
+			// dataRef.uid.once('value').then(function(s){
+			// 	app.menu = s.val();
+			// })
 		} else {
 			//document.location.href = "https://stetsenkoanton.github.io/log.html";
 		}
 	});
+
 	</script>
 	
 </body>
