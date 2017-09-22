@@ -287,19 +287,63 @@
 	};
   	firebase.initializeApp(config);
 
-  	var userID;
-  	firebase.auth().onAuthStateChanged(function(user) {
-		// if (user) {
+ //  	
+ //  	firebase.auth().onAuthStateChanged(function(user) {
+	// 	// if (user) {
+	// 		userID = user.uid;
+	// 		console.log("user ID to func: " + userID);
+	// 	// } else {
+	// 	// 	//document.location.href = "https://stetsenkoanton.github.io/log.html";
+	// 	// }
+	// });
+	// console.log("userID after " + userID)
+
+	var userID;
+	firebase.auth().onAuthStateChanged(function(user) {
+		if (user) {
+			
+		// Пользователь залогинен. Берем данные
+			var displayName = user.displayName;
+			var email = user.email;
+			var emailVerified = user.emailVerified;
+			var photoURL = user.photoURL;
+			var isAnonymous = user.isAnonymous;
+			var uid = user.uid;
 			userID = user.uid;
-			console.log("user ID to func: " + userID);
-		// } else {
-		// 	//document.location.href = "https://stetsenkoanton.github.io/log.html";
-		// }
+			var providerData = user.providerData;
+
+			console.log("displayName ="+displayName);
+			//app.userName = displayName;
+			// console.log(app.userName);
+			// console.log(email);
+			// console.log(emailVerified);
+			// console.log(photoURL);
+			// console.log(isAnonymous);
+			// console.log(uid);
+			// console.log(providerData);
+			
+			console.log("userID ="+userID);
+
+			// dataRef.uid.once('value').then(function(s){
+			// 	app.menu = s.val();
+			// })
+		} else {
+			//document.location.href = "https://stetsenkoanton.github.io/log.html";
+		}
 	});
-	console.log("userID after " + userID)
 
-	var dataRef = firebase.database().ref('users');
-
+	
+	var dataRef = firebase.database().ref('users.userID');
+	console.log("внешний userID ="+userID)
+	(function checkUserId {
+		console.log("start func");
+		if(typeof dataRef === 'undefined') {
+			console.log("создать нового юзера");
+		}
+		else {
+			console.log("поехали дальше");
+		}
+	})();
 	 // Initialize Highlight
 	Vue.directive('highlightjs', {
 	  deep: true,
@@ -440,42 +484,11 @@
 		},
 		mounted: function () {
 			// this.loadBase();
-			setTimeout(function() 
-				{ document.body.className = "app-ready" }, 2000);
-			
-		}
+			setTimeout(function() {
+				document.body.className = "app-ready" }, 2000);
+			}
 	});
-	firebase.auth().onAuthStateChanged(function(user) {
-		if (user) {
 
-		// Пользователь залогинен. Берем данные
-			var displayName = user.displayName;
-			var email = user.email;
-			var emailVerified = user.emailVerified;
-			var photoURL = user.photoURL;
-			var isAnonymous = user.isAnonymous;
-			var uid = user.uid;
-			var providerData = user.providerData;
-
-			console.log(displayName);
-			//app.userName = displayName;
-			// console.log(app.userName);
-			// console.log(email);
-			// console.log(emailVerified);
-			// console.log(photoURL);
-			// console.log(isAnonymous);
-			// console.log(uid);
-			// console.log(providerData);
-			
-			console.log(dataRef);
-
-			// dataRef.uid.once('value').then(function(s){
-			// 	app.menu = s.val();
-			// })
-		} else {
-			//document.location.href = "https://stetsenkoanton.github.io/log.html";
-		}
-	});
 
 	</script>
 	
