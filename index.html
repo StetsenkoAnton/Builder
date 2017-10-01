@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Template constructor</title>
 	<link media="all" rel="stylesheet" href="scss/style.css">
-	
 </head>
 <body>
 	<div id="app" v-bind:class="styleSelect">
@@ -13,9 +12,11 @@
 			Sandbox
 			<button class="btn" type="button" v-on:click="signOut()">Return to registration</button>
 		</header>
+
 		<main class="app_main">
 			<section class="app_settings">
 				<div class="app_tab-wrap">
+					<!-- список табов -->
 					<ul class="app_tab-list">
 						<li class="app_tab" 
 							v-for="(tab, index) in menu"
@@ -36,33 +37,37 @@
 							</div>
 						</li>
 					</ul>
+					<!-- кнопка добавления табов -->
 					<div class="app_tab add-tab">
 						<button class="btn-tab" type="button" v-on:click="addTab">
 							<span class="icon-folder-plus"></span>
 						</button>
 					</div>
+
 				</div>
 				<div class="app_component-box">
+					<!-- список шаблонов -->
 					<ul class="app_tab-content" 
 						v-for="(tab, index) in menu" 
 						v-if="tabSelect == 'tab'+index">
-						<li class="app_component" v-for="(box, index) in tab.tabBox">
+						<li class="app_component" v-for="(temp, index) in tab.tabContent">
 							<label>
-								<input type="checkbox" class="checkbox" v-model="box.boxShow">
-								<span>{{ box.boxName }}</span>
+								<input type="checkbox" class="checkbox" v-model="temp.tempShow">
+								<span>{{ temp.tempName }}</span>
 							</label>
 							<button class="btn--edit" type="button"
 									v-if="editMode"
-									v-on:click="openEditPopupTemplate(box, tab.tabBox, index)" >
+									v-on:click="openEditPopupTemplate(temp, tab.tabContent, index)" >
 								<span class="icon-edit"></span>
 							</button>
 						</li>
 						<li>
-							<button type="button" class="btn--add" v-on:click="openPopup(tab.tabBox)">
+							<button type="button" class="btn--add" v-on:click="openPopup(tab.tabContent, index)">
 								<span class="icon-plus2"></span>&nbsp;<span>New</span>
 							</button>
 						</li>
 					</ul>
+
 				</div>
 			</section>
 		
@@ -71,15 +76,15 @@
 				 	<div class="heading">
 						<h4>HTML</h4> 
 					</div>
-					<div class="result-box hljs">
+					<div class="result-temp hljs">
 						<div v-for="tab in menu">
 							<pre 
-								v-highlightjs="box.boxHtml" 
-								v-for="box in tab.tabBox" 
-								v-if="box.boxShow"
+								v-highlightjs="temp.tempHTML" 
+								v-for="temp in tab.tabContent" 
+								v-if="temp.tempShow"
 								v-on:keyup.tab="pressTabButton"
 								spellcheck="false"
-								contenteditable>&lt;!-- {{box.boxName}} --&gt;
+								contenteditable>&lt;!-- {{temp.tempName}} --&gt;
 								<code></code>
 							</pre>
 						</div>
@@ -89,14 +94,14 @@
 					<div class="heading">
 						<h4>CSS</h4>
 					</div>
-					<div class="result-box hljs">
+					<div class="result-temp hljs">
 						<div v-for="tab in menu">
 							<pre 
-								v-highlightjs="box.boxCss" 
-								v-for="box in tab.tabBox" 
-								v-if="box.boxShow" 
+								v-highlightjs="temp.tempCSS" 
+								v-for="temp in tab.tabContent" 
+								v-if="temp.tempShow" 
 								contenteditable 
-								spellcheck="false">/*-- {{box.boxName}} --*/
+								spellcheck="false">/*-- {{temp.tempName}} --*/
 								<code></code>
 							</pre>
 						</div>
@@ -106,14 +111,14 @@
 					<div class="heading">
 						<h4>JS</h4>
 					</div>
-					<div class="result-box hljs">
+					<div class="result-temp hljs">
 						<div v-for="tab in menu">
 							<pre 
-								v-highlightjs="box.boxJs" 
-								v-for="box in tab.tabBox" 
-								v-if="box.boxShow" 
+								v-highlightjs="temp.tempJS" 
+								v-for="temp in tab.tabContent" 
+								v-if="temp.tempShow" 
 								contenteditable 
-								spellcheck="false">//-- {{box.boxName}} --
+								spellcheck="false">//-- {{temp.tempName}} --
 								<code></code>
 							</pre>
 						</div>
@@ -190,7 +195,7 @@
 				<header class="popup_head">
 					<h1>Create new template</h1>
 					<label>
-						<input type="text" placeholder="Template name" v-model="popupModel.boxName">
+						<input type="text" placeholder="Template name" v-model="popupModel.tempName">
 						
 					</label>
 				</header>
@@ -199,24 +204,24 @@
 					<div class="heading">
 					  <h4>HTML</h4> 
 					</div>
-					<textarea placeholder="HTML" v-model="popupModel.boxHtml"></textarea>
+					<textarea placeholder="HTML" v-model="popupModel.tempHTML"></textarea>
 				  </div>
 				  <div class="result-item css-result">
 					<div class="heading">
 					  <h4>SCSS</h4>
 					</div>
-					<textarea placeholder="CSS" v-model="popupModel.boxCss"></textarea>
+					<textarea placeholder="CSS" v-model="popupModel.tempCSS"></textarea>
 				  </div>
 				  <div class="result-item js-result">
 					<div class="heading">
 					  <h4>JS</h4>
 					</div>
-					<textarea placeholder="JS" v-model="popupModel.boxJs"></textarea>
+					<textarea placeholder="JS" v-model="popupModel.tempJS"></textarea>
 				  </div>
 				</div>
 				<footer class="popup_foot">
 					<button class="btn btn--alert" title="delete new template" v-on:click="cancelPopup">Cancel</button>
-					<button class="btn" v-on:click="saveBox" v-if="popupModel.boxName">Save</button>
+					<button class="btn" v-on:click="saveTemp" v-if="popupModel.tempName">Save</button>
 				</footer>
 			</div>
 		</section>
@@ -226,7 +231,7 @@
 				<header class="popup_head">
 					<h1>Edit template</h1>
 					<label>
-						<input type="text" placeholder="Template name" v-model="templateEditVar.box.boxName">
+						<input type="text" placeholder="Template name" v-model="templateEditVar.temp.tempName">
 					</label>
 					<button class="btn" v-on:click="deleteTemplate">Delete template</button>
 				</header>
@@ -235,19 +240,19 @@
 					<div class="heading">
 					  <h4>HTML</h4> 
 					</div>
-					<textarea placeholder="HTML" v-model="templateEditVar.box.boxHtml"></textarea>
+					<textarea placeholder="HTML" v-model="templateEditVar.temp.tempHTML"></textarea>
 				  </div>
 				  <div class="result-item css-result">
 					<div class="heading">
 					  <h4>SCSS</h4>
 					</div>
-					<textarea placeholder="CSS" v-model="templateEditVar.box.boxCss"></textarea>
+					<textarea placeholder="CSS" v-model="templateEditVar.temp.tempCSS"></textarea>
 				  </div>
 				  <div class="result-item js-result">
 					<div class="heading">
 					  <h4>JS</h4>
 					</div>
-					<textarea placeholder="JS" v-model="templateEditVar.box.boxJs"></textarea>
+					<textarea placeholder="JS" v-model="templateEditVar.temp.tempJS"></textarea>
 				  </div>
 				</div>
 				<footer class="popup_foot">
@@ -286,7 +291,7 @@
 	};
   	firebase.initializeApp(config);
 
-	var dataRef = firebase.database().ref('templates');
+	var dataRef = firebase.database().ref('users/sandbox');
 
 	// Initialize Highlight
 	Vue.directive('highlightjs', {
@@ -317,9 +322,10 @@
 
 	var app = new Vue({
 		el: '#app',
-			data: {
+		data: {
 			tabSelect: 'tab0',
 			tabEdit: '',
+			//tabInEdit: [],
 			tabDelVar: '',
 			templateEditVar: {}, 
 			popupDeleteTab: false,
@@ -334,9 +340,16 @@
 			addTab: function (){
 				var tab = {
 					tabName:'New tab',
-					tabBox: []
+					tabContent: [{
+						tempName: 'New template',
+						tempShow: false,
+						tempHTML: '',
+						tempCSS: '',
+						tempJS: ''
+					}]
 				}
-				this.menu.push(tab)
+				this.menu.push(tab);
+				this.writeBase();
 			},
 			editTab: function (n){
 				var self = this;
@@ -369,38 +382,40 @@
 			cancelPopup: function (){
 				this.popupShow = false;
 			},
-			openPopup: function (tab) {
+			openPopup: function (tab, index) {
 				this.popupShow = true;
 				this.tabInEdit = tab;
 				this.popupModel = {
-					boxName: '',
-					boxShow: false,
-					boxHtml: '',
-					boxCss: '',
-					boxJs: ''
+					tempName: '',
+					tempShow: false,
+					tempHTML: '',
+					tempCSS: '',
+					tempJS: ''
 				}
 			},
-			saveBox: function() {
+			saveTemp: function() {
+				console.log(this.tabInEdit);
+				console.log(this.popupModel);
 				this.tabInEdit.push(this.popupModel);
 				//dataRef.push(self.menu);
 				this.writeBase();
 				this.cancelPopup();
 			},
-			openEditPopupTemplate: function(box, boxParent, index) {
+			openEditPopupTemplate: function(temp, tempParent, index) {
 				this.popupEditShow = true;
 				this.templateEditVar = {
-					box: Object.assign({}, box),
-					boxParent: boxParent,
-					boxIndex: index
+					temp: Object.assign({}, temp),
+					tempParent: tempParent,
+					tempIndex: index
 				};
 			},
 			saveEditTemplate: function() {
-				this.templateEditVar.boxParent.splice(this.templateEditVar.boxIndex, 1, this.templateEditVar.box);
+				this.templateEditVar.tempParent.splice(this.templateEditVar.tempIndex, 1, this.templateEditVar.temp);
 				this.writeBase();
 				this.popupEditShow = false;
 			},
 			deleteTemplate: function() {
-				this.templateEditVar.boxParent.splice(this.templateEditVar.boxIndex, 1);
+				this.templateEditVar.tempParent.splice(this.templateEditVar.tempIndex, 1);
 				this.writeBase();
 				this.popupEditShow = false;
 			},

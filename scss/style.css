@@ -22,7 +22,7 @@ html {
   /* 1 */
   -ms-text-size-adjust: 100%;
   /* 2 */
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
   /* 2 */ }
 
 /**
@@ -64,7 +64,7 @@ progress,
 video {
   display: inline-block;
   /* 1 */
-  vertical-align: baseline;
+  vertical-align: baseline
   /* 2 */ }
 
 /**
@@ -183,8 +183,7 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
   height: 0; }
 
 /**
@@ -225,7 +224,7 @@ textarea {
   /* 1 */
   font: inherit;
   /* 2 */
-  margin: 0;
+  margin: 0
   /* 3 */ }
 
 /**
@@ -257,7 +256,7 @@ input[type="reset"],
 input[type="submit"] {
   -webkit-appearance: button;
   /* 2 */
-  cursor: pointer;
+  cursor: pointer
   /* 3 */ }
 
 /**
@@ -291,10 +290,9 @@ input {
  */
 input[type="checkbox"],
 input[type="radio"] {
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   /* 1 */
-  padding: 0;
+  padding: 0
   /* 2 */ }
 
 /**
@@ -313,8 +311,7 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box
   /* 2 */ }
 
 /**
@@ -341,7 +338,7 @@ fieldset {
 legend {
   border: 0;
   /* 1 */
-  padding: 0;
+  padding: 0
   /* 2 */ }
 
 /**
@@ -497,15 +494,13 @@ th {
 html {
   font-size: 12px;
   line-height: 1.25;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box; }
+  box-sizing: border-box; }
   @media (min-width: 768px) {
     html {
       font-size: 15.996px; } }
 
 *, *:before, *:after {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit; }
+  box-sizing: inherit; }
 
 * {
   max-height: 1000000px; }
@@ -540,8 +535,7 @@ input[type='password'],
 textarea {
   -webkit-appearance: none;
   -webkit-border-radius: 0;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border: none;
   background-color: #444;
   outline: none;
@@ -550,7 +544,7 @@ textarea {
   padding: 0.5em 1em;
   margin-bottom: 1em;
   -webkit-transition: color 0.3s, border-color 0.3s;
-  transition: color 0.3s, border-color 0.3s; }
+          transition: color 0.3s, border-color 0.3s; }
   input[type='text']:invalid,
   input[type='tel']:invalid,
   input[type='email']:invalid,
@@ -558,8 +552,7 @@ textarea {
   input[type='password']:invalid,
   textarea:invalid {
     outline: none;
-    -webkit-box-shadow: none;
-            box-shadow: none;
+    box-shadow: none;
     border: 1px solid red;
     color: red; }
   input[type='text']:focus::-webkit-input-placeholder,
@@ -717,21 +710,26 @@ a {
   color: inherit;
   text-decoration: underline;
   -webkit-transition: color 0.3s, background-color 0.3s, border-color 0.3s;
-  transition: color 0.3s, background-color 0.3s, border-color 0.3s; }
+          transition: color 0.3s, background-color 0.3s, border-color 0.3s; }
   a:hover {
     color: green; }
 
 #app {
   position: relative;
   overflow: hidden;
-  max-width: 100vw; }
+  max-width: 100vw;
+  display: none; }
   @media (min-width: 1024px) {
     #app {
       height: 100vh;
-      display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-template-rows: auto 1fr auto;
       grid-template-areas: "header header 	header" "main 	main 	main" "footer footer 	footer"; } }
+  .app-ready #app {
+    display: block; }
+    @media (min-width: 1024px) {
+      .app-ready #app {
+        display: grid; } }
 
 .app_header {
   grid-area: header; }
@@ -781,12 +779,15 @@ ul:not([id]):not([class]) {
   background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
+  -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center; }
   .app-ready .spinner-wrap {
@@ -817,12 +818,15 @@ ul:not([id]):not([class]) {
   @media (min-width: 768px) {
     .app_header {
       display: -webkit-box;
+      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
+      -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
       -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
           -ms-flex-pack: justify;
               justify-content: space-between; } }
 
@@ -834,16 +838,19 @@ ul:not([id]):not([class]) {
   @media (min-width: 1024px) {
     .app_main {
       display: -webkit-box;
+      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
           -ms-flex-direction: column;
               flex-direction: column; } }
 
 /*---------TABS---------*/
 .app_tab-wrap {
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   position: relative;
@@ -855,6 +862,7 @@ ul:not([id]):not([class]) {
     bottom: -1px;
     top: 0;
     width: 150px;
+    background: -webkit-linear-gradient(right, #343436 70px, rgba(52, 52, 54, 0) 100%);
     background: linear-gradient(to left, #343436 70px, rgba(52, 52, 54, 0) 100%); }
 
 .app_tab-list {
@@ -864,6 +872,7 @@ ul:not([id]):not([class]) {
   overflow-x: auto;
   white-space: nowrap;
   -webkit-box-flex: 0;
+  -webkit-flex: 0 1 auto;
       -ms-flex: 0 1 auto;
           flex: 0 1 auto; }
 
@@ -890,6 +899,7 @@ ul:not([id]):not([class]) {
     -webkit-transform: rotateX(40deg);
             transform: rotateX(40deg);
     -webkit-transform-origin: 50% 100%;
+        -ms-transform-origin: 50% 100%;
             transform-origin: 50% 100%; }
   .app_tab.active {
     z-index: 1; }
@@ -904,6 +914,7 @@ ul:not([id]):not([class]) {
     position: relative;
     z-index: 1;
     -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
         -ms-flex: 0 0 auto;
             flex: 0 0 auto; }
 
@@ -924,9 +935,11 @@ ul:not([id]):not([class]) {
   right: 0;
   top: 0;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center; }
   .tab_edit-box input {
@@ -950,19 +963,24 @@ ul:not([id]):not([class]) {
   margin: 0;
   list-style-type: none;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
   -webkit-box-align: baseline;
+  -webkit-align-items: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
-  -ms-flex-line-pack: start;
-      align-content: flex-start; }
+  -webkit-align-content: flex-start;
+      -ms-flex-line-pack: start;
+          align-content: flex-start; }
 
 .app_component {
   display: inline-block;
@@ -984,12 +1002,14 @@ ul:not([id]):not([class]) {
 /*---------RESULT---------*/
 .app_result {
   -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: hidden; }
   @media (min-width: 1024px) {
     .app_result {
       display: -webkit-box;
+      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex; } }
   .app_result .hljs {
@@ -1001,14 +1021,17 @@ ul:not([id]):not([class]) {
   @media (min-width: 1024px) {
     .result-item {
       -webkit-box-flex: 1;
+      -webkit-flex: 1 1 33.33%;
           -ms-flex: 1 1 33.33%;
               flex: 1 1 33.33%;
       max-width: 33.33%;
       display: -webkit-box;
+      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-orient: vertical;
       -webkit-box-direction: normal;
+      -webkit-flex-direction: column;
           -ms-flex-direction: column;
               flex-direction: column; } }
   .result-item .heading {
@@ -1020,14 +1043,16 @@ ul:not([id]):not([class]) {
       margin-bottom: 0; }
   .result-item textarea {
     -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
         -ms-flex: 1 1 auto;
             flex: 1 1 auto;
     margin-bottom: 0; }
   .result-item pre {
     overflow: initial; }
 
-.result-box {
+.result-temp {
   -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
           flex: 1 1 auto;
   overflow: auto;
@@ -1049,15 +1074,18 @@ ul:not([id]):not([class]) {
 .popup_box {
   position: absolute;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
   left: 50%;
   top: 50%;
   -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   width: 95vw;
   height: 95vh;
@@ -1070,31 +1098,37 @@ ul:not([id]):not([class]) {
 .popup_foot {
   padding-top: 1em;
   display: -webkit-box;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between; }
 
 .app_footer {
   padding: 10px 30px;
   font-size: .875rem;
-  background: -webkit-gradient(linear, left top, right top, from(#5b5b5b), to(#545454));
+  background: -webkit-linear-gradient(0deg, #5b5b5b, #545454);
   background: linear-gradient(90deg, #5b5b5b, #545454);
   border-top: 1px solid #7d7d7d;
   color: #fff; }
   @media (min-width: 768px) {
     .app_footer {
       display: -webkit-box;
+      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
       -webkit-box-align: center;
+      -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
       -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
           -ms-flex-pack: justify;
               justify-content: space-between; } }
 
@@ -1541,7 +1575,7 @@ hue-6-2: #c18401
 
 Colorbrewer theme
 Original: https://github.com/mbostock/colorbrewer-theme (c) Mike Bostock <mike@ocks.org>
-Ported by Fabrício Tavares de Oliveira
+Ported by Fabr├нcio Tavares de Oliveira
 
 */
 .color-brewer .hljs {

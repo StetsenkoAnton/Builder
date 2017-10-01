@@ -13,7 +13,7 @@
 		<button class="btn" type="button" v-on:click="loadBase()">+</button>
 	</div> -->
 		<header class="app_header">
-			You sign in like: {{ userName }}
+			You sign in: {{ userName }}
 			<button class="btn" type="button" v-on:click="signOut()">Sign out</button>
 		</header>
 		<main class="app_main">
@@ -285,6 +285,7 @@
 		storageBucket: "fitter-template.appspot.com",
 		messagingSenderId: "626900079578"
 	};
+
   	firebase.initializeApp(config);
 
  //  	
@@ -309,7 +310,6 @@
 			var photoURL = user.photoURL;
 			var isAnonymous = user.isAnonymous;
 			var uid = user.uid;
-			userID = user.uid;
 			var providerData = user.providerData;
 
 			console.log("displayName ="+displayName);
@@ -332,18 +332,20 @@
 		}
 	});
 
-	
-	var dataRef = firebase.database().ref('users.userID');
-	console.log("внешний userID ="+userID)
-	(function checkUserId {
-		console.log("start func");
-		if(typeof dataRef === 'undefined') {
-			console.log("создать нового юзера");
-		}
-		else {
-			console.log("поехали дальше");
-		}
-	})();
+	var dataRef = firebase.database().ref('users');
+	// var dataRef = firebase.database().ref('users.userID');
+	console.log("внешний userID ="+userID);
+	console.log(dataRef);
+	// function checkUserId {
+	// 	console.log("start func");
+	// 	if(typeof dataRef === 'undefined') {
+	// 		console.log("создать нового юзера");
+	// 	}
+	// 	else {
+	// 		console.log("поехали дальше");
+	// 	}
+	// };
+	// checkUserId();
 	 // Initialize Highlight
 	Vue.directive('highlightjs', {
 	  deep: true,

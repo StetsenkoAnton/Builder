@@ -5,14 +5,20 @@
 	position: relative;
 	overflow: hidden;
 	max-width: 100vw;
+	display: none;
 	@include media('>=desktop') {
 		height: 100vh;
-		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-template-rows: auto 1fr auto;
 		grid-template-areas: 	"header header 	header"
         	               		"main 	main 	main"
             	           		"footer footer 	footer";
+	}
+	.app-ready & {
+		display: block;
+		@include media('>=desktop') {
+			display: grid;
+		}
 	}
 }
 
@@ -31,6 +37,8 @@
 //
 //------- General elements -----------
 //
+
+//[v-cloak] { display: none }
 
 ul:not([id]):not([class]) {
 	list-style: none;
