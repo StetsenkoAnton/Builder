@@ -9,8 +9,8 @@
 <body>
 	<div id="app" v-bind:class="styleSelect">
 		<header class="app_header">
-			{{userName}}
-			<button class="btn" type="button" v-on:click="signOut()">Log out</button>
+			Sandbox
+			<button class="btn" type="button" v-on:click="signOut()">Return to registration</button>
 		</header>
 
 		<main class="app_main">
@@ -290,59 +290,8 @@
 		messagingSenderId: "626900079578"
 	};
   	firebase.initializeApp(config);
-  	var dataRef;
-	firebase.auth().onAuthStateChanged(function(user) {
-		function setNewUser(userData) {
-			if (userData) {
-				console.log("log in");
-				app.menu = userData;	
-			}
-			else {
-				console.log("create new user");
-				firebase.database().ref('users/' + uid).set(
-				    [{
-				    	tabName: 'New tab',
-				    	tabContent: [{
-			    			tempCSS: 'CSS tempalte',
-							tempHTML: 'HTML tempalte',
-							tempJS: 'JS tempalte',
-							tempName: 'Name tempalte',
-							tempShow: true
-			    		}]
-				    }]
-				);
-				app.loadBase();
-			}
-		};
 
-		if (user) {
-			
-		// Пользователь залогинен. Берем данные
-			//var displayName = user.displayName;
-			// var email = user.email;
-			// var emailVerified = user.emailVerified;
-			// var photoURL = user.photoURL;
-			// var isAnonymous = user.isAnonymous;
-			// var providerData = user.providerData;
-			
-			var uid = user.uid;
-			//console.log("userID ="+uid);
-
-			dataRef = firebase.database().ref('users/' + uid);
-			//console.log("dataRef ="+dataRef);
-
-			dataRef.once('value').then(function(s){
-				var userData = s.val();
-				setNewUser(userData);
-				//console.log("userData =" + userData);
-			});
-
-			app.userName = user.displayName;
-		} else {
-			document.location.href = "https://stetsenkoanton.github.io/log.html";
-			//document.location.href = "log.html";
-		}
-	});
+	var dataRef = firebase.database().ref('users/sandbox');
 
 	// Initialize Highlight
 	Vue.directive('highlightjs', {
@@ -376,6 +325,7 @@
 		data: {
 			tabSelect: 'tab0',
 			tabEdit: '',
+			//tabInEdit: [],
 			tabDelVar: '',
 			templateEditVar: {}, 
 			popupDeleteTab: false,
@@ -384,7 +334,6 @@
 			styleSelect: 'atom-one-dark',
 			editMode: false,
 			popupModel: {},
-			userName: '',
 			menu: []
 		},
 		methods: {
@@ -491,7 +440,7 @@
 			}
 		},
 		mounted: function () {
-			// this.loadBase();
+			this.loadBase();
 			setTimeout(function() 
 				{ document.body.className = "app-ready" }, 2000);
 		}
