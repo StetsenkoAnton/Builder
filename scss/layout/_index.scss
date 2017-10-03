@@ -21,7 +21,7 @@
 	display: flex;
 	position: relative;
 	padding: 0 $global-padding;
-	border-bottom: 1px solid #fff;
+	border-bottom: 1px solid rgba(#fff, .25);
 	&:after {
 		content: '';
 		position: absolute;
@@ -48,7 +48,7 @@
 	text-align: center;
 	margin: 0 10px;
 	position: relative;
-	border-top: 1px solid #fff;
+	border-top: 1px solid rgba(#fff, .25);
 	border-bottom: none;
 	background-color: $tab-bg;
 	&:before, &:after {
@@ -57,7 +57,7 @@
 		top: -1px;
 		bottom: 0;
 		width: 17px;
-		border: 1px solid #fff;
+		border: 1px solid rgba(#fff, .25);
 		border-bottom: none;
 		background-color: $tab-bg;
 	}
@@ -80,7 +80,7 @@
 		background: #1A1C1D;
 		&:before, &:after {
 			background: #1A1C1D;
-			border-color: #fff;
+			border-color: rgba(#fff, .25);
 			z-index: 3;
 			// border-bottom: 1px solid #1A1C1D;
 		}

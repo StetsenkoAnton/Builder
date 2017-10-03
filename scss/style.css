@@ -855,7 +855,7 @@ ul:not([id]):not([class]) {
   display: flex;
   position: relative;
   padding: 0 30px;
-  border-bottom: 1px solid #fff; }
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25); }
   .app_tab-wrap:after {
     content: '';
     position: absolute;
@@ -884,7 +884,7 @@ ul:not([id]):not([class]) {
   text-align: center;
   margin: 0 10px;
   position: relative;
-  border-top: 1px solid #fff;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
   border-bottom: none;
   background-color: #343436; }
   .app_tab:before, .app_tab:after {
@@ -893,7 +893,7 @@ ul:not([id]):not([class]) {
     top: -1px;
     bottom: 0;
     width: 17px;
-    border: 1px solid #fff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-bottom: none;
     background-color: #343436; }
   .app_tab:before {
@@ -921,7 +921,7 @@ ul:not([id]):not([class]) {
     background: #1A1C1D; }
     .app_tab.active:before, .app_tab.active:after {
       background: #1A1C1D;
-      border-color: #fff;
+      border-color: rgba(255, 255, 255, 0.25);
       z-index: 3; }
     .app_tab.active .btn-tab:after {
       content: '';
