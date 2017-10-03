@@ -21,6 +21,7 @@
 	display: flex;
 	position: relative;
 	padding: 0 $global-padding;
+	border-bottom: 1px solid #fff;
 	&:after {
 		content: '';
 		position: absolute;
@@ -33,10 +34,11 @@
 }
 
 .app_tab-list {
-	padding: 0 5px;
+	padding: 0 7px;
 	margin: 0 0 -1px;
 	list-style-type: none;
 	overflow-x: auto;
+	overflow-y: hidden;
 	white-space: nowrap;
 	flex: 0 1 auto;
 }
@@ -44,30 +46,53 @@
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
-	margin: 0 -5px;
+	margin: 0 10px;
 	position: relative;
-	perspective: 100px;
-	&:before {
+	border-top: 1px solid #fff;
+	border-bottom: none;
+	background-color: $tab-bg;
+	&:before, &:after {
 		content: '';
 		position: absolute;
+		top: -1px;
 		bottom: 0;
-		left: 0;
-		height: 160%;
-		width: 100%;
-		border: 2px solid rgba(#aaa, .25);
-		border-top-width: 3px;
-		border-bottom-width: 1px;
-		border-radius: $bdrs $bdrs 0 0;
-		background: #343436;
-		transform: rotateX(40deg);
-		transform-origin: 50% 100%;
+		width: 17px;
+		border: 1px solid #fff;
+		border-bottom: none;
+		background-color: $tab-bg;
+	}
+	&:before {
+		left: -4px;
+		transform: skew(-20deg);
+		transform-origin: top right;
+		border-right: none;
+		border-radius: 4px 0 0 0;
+	}
+	&:after {
+		right: -4px;
+		transform: skew(20deg);
+		transform-origin: top left;
+		border-left: none;
+		border-radius: 0 4px 0 0;
+		z-index: 2;
 	}
 	&.active {
-		z-index: 1;
-		&:before {
+		background: #1A1C1D;
+		&:before, &:after {
 			background: #1A1C1D;
-			border-color: rgba(#fff, .25);
-			border-bottom: 1px solid #1A1C1D;
+			border-color: #fff;
+			z-index: 3;
+			// border-bottom: 1px solid #1A1C1D;
+		}
+		.btn-tab:after {
+			content: '';
+			position: absolute;
+			bottom: -2px;
+			left: -17px;
+			right: -17px;
+			height: 2px;
+			z-index: 4;
+			background: #1A1C1D;
 		}
 	}
 	&.edit {
@@ -85,7 +110,7 @@
 
 .btn-tab {
 	background-color: transparent;
-	padding: .5em 1.5em;
+	padding: .5em .5em;
 	text-transform: uppercase;
 	color: #fff;
 	position: relative;
@@ -120,7 +145,7 @@
 }
 /*---------TAB Content---------*/
 .app_component-box {
-	border-top: 1px solid rgba(#fff, .25);
+	//border-top: 1px solid rgba(#fff, .25);
 	background-color: #1A1C1D;
 }
 .app_tab-content {

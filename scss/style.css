@@ -854,7 +854,8 @@ ul:not([id]):not([class]) {
   display: -ms-flexbox;
   display: flex;
   position: relative;
-  padding: 0 30px; }
+  padding: 0 30px;
+  border-bottom: 1px solid #fff; }
   .app_tab-wrap:after {
     content: '';
     position: absolute;
@@ -866,10 +867,11 @@ ul:not([id]):not([class]) {
     background: linear-gradient(to left, #343436 70px, rgba(52, 52, 54, 0) 100%); }
 
 .app_tab-list {
-  padding: 0 5px;
+  padding: 0 7px;
   margin: 0 0 -1px;
   list-style-type: none;
   overflow-x: auto;
+  overflow-y: hidden;
   white-space: nowrap;
   -webkit-box-flex: 0;
   -webkit-flex: 0 1 auto;
@@ -880,33 +882,56 @@ ul:not([id]):not([class]) {
   display: inline-block;
   vertical-align: top;
   text-align: center;
-  margin: 0 -5px;
+  margin: 0 10px;
   position: relative;
-  -webkit-perspective: 100px;
-          perspective: 100px; }
-  .app_tab:before {
+  border-top: 1px solid #fff;
+  border-bottom: none;
+  background-color: #343436; }
+  .app_tab:before, .app_tab:after {
     content: '';
     position: absolute;
+    top: -1px;
     bottom: 0;
-    left: 0;
-    height: 160%;
-    width: 100%;
-    border: 2px solid rgba(170, 170, 170, 0.25);
-    border-top-width: 3px;
-    border-bottom-width: 1px;
-    border-radius: 12px 12px 0 0;
-    background: #343436;
-    -webkit-transform: rotateX(40deg);
-            transform: rotateX(40deg);
-    -webkit-transform-origin: 50% 100%;
-        -ms-transform-origin: 50% 100%;
-            transform-origin: 50% 100%; }
+    width: 17px;
+    border: 1px solid #fff;
+    border-bottom: none;
+    background-color: #343436; }
+  .app_tab:before {
+    left: -4px;
+    -webkit-transform: skew(-20deg);
+        -ms-transform: skew(-20deg);
+            transform: skew(-20deg);
+    -webkit-transform-origin: top right;
+        -ms-transform-origin: top right;
+            transform-origin: top right;
+    border-right: none;
+    border-radius: 4px 0 0 0; }
+  .app_tab:after {
+    right: -4px;
+    -webkit-transform: skew(20deg);
+        -ms-transform: skew(20deg);
+            transform: skew(20deg);
+    -webkit-transform-origin: top left;
+        -ms-transform-origin: top left;
+            transform-origin: top left;
+    border-left: none;
+    border-radius: 0 4px 0 0;
+    z-index: 2; }
   .app_tab.active {
-    z-index: 1; }
-    .app_tab.active:before {
+    background: #1A1C1D; }
+    .app_tab.active:before, .app_tab.active:after {
       background: #1A1C1D;
-      border-color: rgba(255, 255, 255, 0.25);
-      border-bottom: 1px solid #1A1C1D; }
+      border-color: #fff;
+      z-index: 3; }
+    .app_tab.active .btn-tab:after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -17px;
+      right: -17px;
+      height: 2px;
+      z-index: 4;
+      background: #1A1C1D; }
   .app_tab.edit .btn-tab {
     opacity: 0;
     padding-left: 3.5em; }
@@ -920,7 +945,7 @@ ul:not([id]):not([class]) {
 
 .btn-tab {
   background-color: transparent;
-  padding: .5em 1.5em;
+  padding: .5em .5em;
   text-transform: uppercase;
   color: #fff;
   position: relative; }
@@ -954,7 +979,6 @@ ul:not([id]):not([class]) {
 
 /*---------TAB Content---------*/
 .app_component-box {
-  border-top: 1px solid rgba(255, 255, 255, 0.25);
   background-color: #1A1C1D; }
 
 .app_tab-content {
