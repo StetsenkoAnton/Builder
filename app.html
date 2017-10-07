@@ -39,7 +39,8 @@
 					</ul>
 					<!-- кнопка добавления табов -->
 					<div class="app_tab add-tab">
-						<button class="btn-tab" type="button" v-on:click="addTab">
+						<button class="btn-tab" type="button" 
+							v-on:click="addTab">
 							<span class="icon-folder-plus"></span>
 						</button>
 					</div>
@@ -52,7 +53,8 @@
 						v-if="tabSelect == 'tab'+index">
 						<li class="app_component" v-for="(temp, index) in tab.tabContent">
 							<label>
-								<input type="checkbox" class="checkbox" v-model="temp.tempShow">
+								<input type="checkbox" class="checkbox" 
+									v-model="temp.tempShow">
 								<span>{{ temp.tempName }}</span>
 							</label>
 							<button class="btn--edit" type="button"
@@ -62,7 +64,8 @@
 							</button>
 						</li>
 						<li>
-							<button type="button" class="btn--add" v-on:click="openPopup(tab.tabContent, index)">
+							<button type="button" class="btn--add" 
+								v-on:click="openPopup(tab.tabContent, index)">
 								<span class="icon-plus2"></span>&nbsp;<span>New</span>
 							</button>
 						</li>
@@ -150,7 +153,8 @@
 					<option value="monokai-sublime">monokai-sublime</option>
 				</select>
 			</div>
-<!-- 			<div class="icon-plus2"></div>
+<!-- 			
+<div class="icon-plus2"></div>
 <div class="icon-check"></div>
 <div class="icon-close"></div>
 <div class="icon-cog2"></div>
@@ -183,85 +187,83 @@
 <div class="icon-linkedin2"></div> -->
 
 		</footer>
+
 		<section class="popup popup_new-template" 
 				v-if="popupShow">
 			<div class="popup_box">
 				<header class="popup_head">
-					<h1>Create new template</h1>
+					<h1 v-if="popupEditShow === false">Create new template</h1>
+					<h1 v-if="popupEditShow">Edit template</h1>
 					<label>
-						<input type="text" placeholder="Template name" v-model="popupModel.tempName">
-						
+						<input type="text" placeholder="Template name" 
+							v-model="popupModel.tempName"
+							v-if="popupEditShow === false">
+						<input type="text" placeholder="Template name" 
+							v-model="templateEditVar.temp.tempName"
+							v-if="popupEditShow">
 					</label>
+					<button class="btn" 
+						v-on:click="deleteTemplate"
+						v-if="popupEditShow">Delete template</button>
 				</header>
 				<div class="app_result">
 				  <div class="result-item html-result">
 					<div class="heading">
 					  <h4>HTML</h4> 
 					</div>
-					<textarea placeholder="HTML" v-model="popupModel.tempHTML"></textarea>
+					<textarea placeholder="HTML" 
+						v-model="popupModel.tempHTML"
+						v-if="popupEditShow === false"></textarea>
+					<textarea placeholder="HTML" 
+						v-model="templateEditVar.temp.tempHTML"
+						v-if="popupEditShow"></textarea>
 				  </div>
 				  <div class="result-item css-result">
 					<div class="heading">
 					  <h4>SCSS</h4>
 					</div>
-					<textarea placeholder="CSS" v-model="popupModel.tempCSS"></textarea>
+					<textarea placeholder="CSS" 
+						v-model="popupModel.tempCSS"
+						v-if="popupEditShow === false"></textarea>
+					<textarea placeholder="CSS" 
+						v-model="templateEditVar.temp.tempCSS"
+						v-if="popupEditShow"></textarea>
 				  </div>
 				  <div class="result-item js-result">
 					<div class="heading">
 					  <h4>JS</h4>
 					</div>
-					<textarea placeholder="JS" v-model="popupModel.tempJS"></textarea>
+					<textarea placeholder="JS" 
+						v-model="popupModel.tempJS"
+						v-if="popupEditShow === false"></textarea>
+					<textarea placeholder="JS" 
+						v-model="templateEditVar.temp.tempJS"
+						v-if="popupEditShow"></textarea>
 				  </div>
 				</div>
 				<footer class="popup_foot">
-					<button class="btn btn--alert" title="delete new template" v-on:click="cancelPopup">Cancel</button>
-					<button class="btn" v-on:click="saveTemp" v-if="popupModel.tempName">Save</button>
+					<button class="btn btn--alert" title="delete new template" 
+						v-on:click="cancelPopup">Cancel</button>
+					<button class="btn"
+						v-on:click="saveTemp"
+						v-show="popupModel.tempName"
+						v-if="popupEditShow === false">Save</button>
+					<button class="btn"
+						v-on:click="saveEditTemplate"
+						v-if="popupEditShow">Save</button>
 				</footer>
 			</div>
 		</section>
-		<section class="popup popup_new-template" 
-				v-if="popupEditShow">
-			<div class="popup_box">
-				<header class="popup_head">
-					<h1>Edit template</h1>
-					<label>
-						<input type="text" placeholder="Template name" v-model="templateEditVar.temp.tempName">
-					</label>
-					<button class="btn" v-on:click="deleteTemplate">Delete template</button>
-				</header>
-				<div class="app_result">
-				  <div class="result-item html-result">
-					<div class="heading">
-					  <h4>HTML</h4> 
-					</div>
-					<textarea placeholder="HTML" v-model="templateEditVar.temp.tempHTML"></textarea>
-				  </div>
-				  <div class="result-item css-result">
-					<div class="heading">
-					  <h4>SCSS</h4>
-					</div>
-					<textarea placeholder="CSS" v-model="templateEditVar.temp.tempCSS"></textarea>
-				  </div>
-				  <div class="result-item js-result">
-					<div class="heading">
-					  <h4>JS</h4>
-					</div>
-					<textarea placeholder="JS" v-model="templateEditVar.temp.tempJS"></textarea>
-				  </div>
-				</div>
-				<footer class="popup_foot">
-					<button class="btn btn--alert" v-on:click="popupEditShow = false;">Cancel</button>
-					<button class="btn" v-on:click="saveEditTemplate">Save</button>
-				</footer>
-			</div>
-		</section>
+
 		<section class="popup popup_delete-tab" 
 				v-if="popupDeleteTab">
 				<div class="popup_box">
-					<h2>Удалить вкладку и все ее содержимое?</h2>
+					<h2>Delete the tab and all its contents?</h2>
 					<footer class="popup_foot">
-						<button class="btn " title="delete new template" v-on:click="popupDeleteTab = false;">Cancel</button>
-						<button class="btn btn--alert" v-on:click="deleteTab">Удалить</button>
+						<button class="btn " title="delete new template" 
+							v-on:click="popupDeleteTab = false;">Cancel</button>
+						<button class="btn btn--alert" 
+							v-on:click="deleteTab">Delete</button>
 					</footer>
 				</div>
 		</section>
@@ -285,6 +287,7 @@
 	};
   	firebase.initializeApp(config);
   	var dataRef;
+  	// 
 	firebase.auth().onAuthStateChanged(function(user) {
 		function setNewUser(userData) {
 			if (userData) {
@@ -426,6 +429,7 @@
 			},
 			cancelPopup: function (){
 				this.popupShow = false;
+				this.popupEditShow = false;
 			},
 			openPopup: function (tab, index) {
 				this.popupShow = true;
@@ -439,8 +443,8 @@
 				}
 			},
 			saveTemp: function() {
-				console.log(this.tabInEdit);
-				console.log(this.popupModel);
+				// console.log(this.tabInEdit);
+				// console.log(this.popupModel);
 				this.tabInEdit.push(this.popupModel);
 				//dataRef.push(self.menu);
 				this.writeBase();
@@ -448,6 +452,7 @@
 			},
 			openEditPopupTemplate: function(temp, tempParent, index) {
 				this.popupEditShow = true;
+				this.popupShow = true;
 				this.templateEditVar = {
 					temp: Object.assign({}, temp),
 					tempParent: tempParent,
@@ -457,12 +462,12 @@
 			saveEditTemplate: function() {
 				this.templateEditVar.tempParent.splice(this.templateEditVar.tempIndex, 1, this.templateEditVar.temp);
 				this.writeBase();
-				this.popupEditShow = false;
+				this.popupShow = false;
 			},
 			deleteTemplate: function() {
 				this.templateEditVar.tempParent.splice(this.templateEditVar.tempIndex, 1);
 				this.writeBase();
-				this.popupEditShow = false;
+				this.popupShow = false;
 			},
 			loadBase: function() {
 				var self = this;
@@ -491,8 +496,6 @@
 		}
 	});
 	
-
 	</script>
-	
 </body>
 </html>
